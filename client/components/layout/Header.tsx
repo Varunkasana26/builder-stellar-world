@@ -44,21 +44,24 @@ export function Header() {
               </a>
             ))}
 
-          {!user ? (
-            <Link to="/login" className="inline-flex items-center justify-center rounded-md border px-4 py-2 font-medium hover:bg-secondary/20 transition">
-              Login
-            </Link>
-          ) : (
-            <div className="flex items-center gap-3">
-              <div className="text-sm text-muted-foreground">{user.username} <span className="text-xs text-muted-foreground block">{user.ministry}</span></div>
-              <button
-                onClick={onLogout}
-                className="inline-flex items-center justify-center rounded-md bg-primary hover:bg-emerald-600 text-primary-foreground px-3 py-2 font-medium transition transform hover:-translate-y-0.5"
-              >
-                Logout
-              </button>
-            </div>
-          )}
+          <div className="flex items-center gap-3">
+            <ThemeButton />
+            {!user ? (
+              <Link to="/login" className="inline-flex items-center justify-center rounded-md border px-4 py-2 font-medium hover:bg-secondary/20 transition">
+                Login
+              </Link>
+            ) : (
+              <div className="flex items-center gap-3">
+                <div className="text-sm text-muted-foreground">{user.username} <span className="text-xs text-muted-foreground block">{user.ministry}</span></div>
+                <button
+                  onClick={onLogout}
+                  className="inline-flex items-center justify-center rounded-md bg-primary hover:bg-emerald-600 text-primary-foreground px-3 py-2 font-medium transition transform hover:-translate-y-0.5"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </nav>
       </div>
     </header>
