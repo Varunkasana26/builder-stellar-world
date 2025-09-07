@@ -24,16 +24,9 @@ export default function Dashboard() {
       </section>
 
       <section className="container py-6">
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div>
-            <h2 className="text-lg font-semibold mb-3">Applications Workflow</h2>
-            <ApplicationsPanel />
-          </div>
-
-          <div>
-            <h2 className="text-lg font-semibold mb-3">Interactive Atlas</h2>
-            <AtlasMap />
-          </div>
+        <div>
+          <h2 className="text-lg font-semibold mb-3">Applications Workflow</h2>
+          <ApplicationsPanel />
         </div>
       </section>
     </main>
