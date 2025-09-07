@@ -26,8 +26,8 @@ export function AtlasMap() {
   const center = useMemo(() => ({ lat: 23.3, lng: 77.25 }), []);
 
   return (
-    <div className="w-full h-[520px] rounded-xl overflow-hidden border shadow-sm">
-      <MapContainer center={center} zoom={9} className="h-full w-full">
+    <div className="w-full h-[520px] rounded-xl overflow-hidden border shadow-2xl card-quiet">
+      <MapContainer center={center} zoom={9} className="h-full w-full rounded-md">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
