@@ -26,7 +26,7 @@ export default function Index() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs bg-accent">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 AI-powered FRA Atlas & WebGIS DSS
             </div>
             <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">
