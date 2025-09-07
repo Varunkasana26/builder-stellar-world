@@ -5,7 +5,15 @@ export function StatsCards() {
   const [stats, setStats] = useState<StatsOverview | null>(null);
 
   useEffect(() => {
-    fetch("/api/stats/overview").then(async (r) => setStats(await r.json()));
+    (async () => {
+      try {
+        const r = await fetch("/api/stats/overview");
+        if (!r.ok) return console.error('Failed to fetch stats', r.status);
+        setStats(await r.json());
+      } catch (err) {
+        console.error('Error fetching stats overview', err);
+      }
+    })();
   }, []);
 
   const items = [
@@ -13,7 +21,7 @@ export function StatsCards() {
     { label: "Approved", value: stats?.approvedClaims ?? "—" },
     { label: "Pending", value: stats?.pendingClaims ?? "—" },
     { label: "Rejected", value: stats?.rejectedClaims ?? "—" },
-    { label: "Total Area (ha)", value: stats?.totalAreaHa.toLocaleString?.() ?? "—" },
+    { label: "Total Area (ha)", value: stats?.totalAreaHa ? stats.totalAreaHa.toLocaleString() : "—" },
   ];
 
   return (
