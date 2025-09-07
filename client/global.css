@@ -14,10 +14,10 @@
   */
   :root {
     /* Softer dark background with green undertone */
-    --background: 140 18% 16%;
+    --background: 140 18% 20%;
     --foreground: 210 16% 96%;
 
-    --card: 140 20% 20%;
+    --card: 140 20% 24%;
     --card-foreground: 210 16% 96%;
 
     --popover: 140 20% 20%;
