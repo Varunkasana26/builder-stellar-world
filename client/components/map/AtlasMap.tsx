@@ -6,8 +6,21 @@ export function AtlasMap() {
   const [claims, setClaims] = useState<any | null>(null);
 
   useEffect(() => {
-    fetch("/api/geo/forest-boundary").then(async (r) => setForest(await r.json()));
-    fetch("/api/geo/claims").then(async (r) => setClaims(await r.json()));
+    (async () => {
+      try {
+        const r1 = await fetch("/api/geo/forest-boundary");
+        if (r1.ok) setForest(await r1.json()); else console.error('Failed to load forest boundary', r1.status);
+      } catch (err) {
+        console.error('Error fetching forest boundary', err);
+      }
+
+      try {
+        const r2 = await fetch("/api/geo/claims");
+        if (r2.ok) setClaims(await r2.json()); else console.error('Failed to load claims', r2.status);
+      } catch (err) {
+        console.error('Error fetching claims', err);
+      }
+    })();
   }, []);
 
   const center = useMemo(() => ({ lat: 23.3, lng: 77.25 }), []);
