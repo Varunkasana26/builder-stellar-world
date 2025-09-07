@@ -13,16 +13,24 @@ export function ClaimAnalyzer() {
   const [result, setResult] = useState<AnalysisResponse | null>(null);
 
   useEffect(() => {
-    fetch("/api/geo/claims")
-      .then((r) => r.json())
-      .then((fc) => {
+    (async () => {
+      try {
+        const res = await fetch("/api/geo/claims");
+        if (!res.ok) {
+          console.error("Failed to fetch claims", res.status);
+          return;
+        }
+        const fc = await res.json();
         const items = (fc.features || []).map((f: any) => ({
           id: f.properties.id,
           claimantName: f.properties.claimantName,
         }));
         setClaims(items);
         if (items.length) setSelected(items[0].id);
-      });
+      } catch (err) {
+        console.error("Error fetching claims:", err);
+      }
+    })();
   }, []);
 
   const onAnalyze = async () => {
