@@ -25,11 +25,12 @@ export function StatsCards() {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {items.map((it) => (
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-4 stat-animate">
+      {items.map((it, idx) => (
         <div
           key={it.label}
-          className="rounded-xl border p-4 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30"
+          className="rounded-xl border p-4 bg-gradient-to-br from-emerald-900/20 to-emerald-800/20 hover:shadow-lg transform hover:-translate-y-1 transition-all"
+          style={{ animationDelay: `${idx * 60}ms` }}
         >
           <div className="text-xs text-muted-foreground">{it.label}</div>
           <div className="mt-1 text-2xl font-bold">{it.value}</div>
