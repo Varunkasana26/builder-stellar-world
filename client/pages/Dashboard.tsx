@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAuth } from "@/lib/auth";
 import { ApplicationsPanel } from "@/components/apps/ApplicationsPanel";
 import { StatsCards } from "@/components/StatsCards";
+import { ActivityFeed } from "@/components/ActivityFeed";
 
 export default function Dashboard() {
   const auth = useAuth();
