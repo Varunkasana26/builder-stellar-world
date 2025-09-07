@@ -133,7 +133,7 @@ export function ApplicationsPanel() {
                 <div className="text-sm text-muted-foreground">Area: {a.areaHa} ha</div>
                 <div className="mt-2 flex gap-2">
                   {a.stages.map((s, i) => (
-                    <div key={i} className={`px-2 py-1 rounded ${s.status === 'approved' ? 'bg-emerald-100 text-emerald-700' : s.status === 'rejected' ? 'bg-destructive text-destructive-foreground' : 'bg-slate-50 text-muted-foreground'}`}>
+                    <div key={i} className={`px-2 py-1 rounded ${s.status === 'approved' ? 'bg-emerald-100 text-emerald-600' : s.status === 'rejected' ? 'bg-destructive text-destructive-foreground' : 'bg-slate-50 text-muted-foreground'}`}>
                       {s.ministry}: {s.status}
                     </div>
                   ))}
