@@ -5,7 +5,18 @@ import { ClaimAnalyzer } from "@/components/ai/ClaimAnalyzer";
 
 export default function Index() {
   useEffect(() => {
-    window.location.hash && document.querySelector(window.location.hash)?.scrollIntoView({ behavior: "smooth" });
+    try {
+      const rawHash = window.location.hash;
+      if (!rawHash) return;
+      // remove query params if present (e.g. #about?reload=123)
+      const clean = rawHash.split("?")[0];
+      const id = clean.startsWith("#") ? clean.slice(1) : clean;
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } catch (err) {
+      console.warn("Failed to scroll to hash:", err);
+    }
   }, []);
 
   return (
