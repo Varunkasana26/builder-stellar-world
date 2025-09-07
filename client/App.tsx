@@ -22,7 +22,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
         <BrowserRouter>
           <div className="min-h-screen flex flex-col">
             <Header />
@@ -50,6 +51,7 @@ const App = () => (
           </div>
         </BrowserRouter>
       </AuthProvider>
+      </ThemeProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
