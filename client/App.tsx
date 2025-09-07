@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AuthProvider, ProtectedRoute } from "@/lib/auth";
+import { ThemeProvider } from "@/lib/theme";
 
 const queryClient = new QueryClient();
 
