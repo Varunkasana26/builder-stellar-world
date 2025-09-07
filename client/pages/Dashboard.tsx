@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useAuth } from "@/lib/auth";
-import { AtlasMap } from "@/components/map/AtlasMap";
 import { ApplicationsPanel } from "@/components/apps/ApplicationsPanel";
 import { StatsCards } from "@/components/StatsCards";
 
