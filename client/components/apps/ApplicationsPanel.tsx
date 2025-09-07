@@ -94,7 +94,7 @@ export function ApplicationsPanel() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Applications</h3>
           <div className="flex items-center gap-3">
-            <button onClick={createMock} className="rounded-md bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1">Create Demo Application</button>
+            <button onClick={createMock} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1">Create Demo Application</button>
             <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
           </div>
         </div>
@@ -118,7 +118,7 @@ export function ApplicationsPanel() {
               </div>
             </div>
             <div className="mt-4 flex items-center gap-3">
-              <button onClick={submitFRA} disabled={submitting} className="rounded-md bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2">Submit Application</button>
+              <button onClick={submitFRA} disabled={submitting} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Application</button>
               <div className="text-sm text-muted-foreground">After submission, the application will be forwarded to the next ministry for review.</div>
             </div>
           </div>
@@ -144,7 +144,7 @@ export function ApplicationsPanel() {
                 <button onClick={() => setSelected(a)} className="text-sm underline">View</button>
                 {canAct(a) ? (
                   <div className="flex gap-2">
-                    <button onClick={() => act(a.id, "approve")} className="rounded-md bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1">Approve</button>
+                    <button onClick={() => act(a.id, "approve")} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1">Approve</button>
                     <button onClick={() => act(a.id, "reject")} className="rounded-md border px-3 py-1">Reject</button>
                   </div>
                 ) : (
