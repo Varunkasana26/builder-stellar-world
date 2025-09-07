@@ -27,5 +27,11 @@ export function createServer() {
   app.post("/api/analysis/claim", analyzeClaim);
   app.get("/api/stats/overview", getStatsOverview);
 
+  // Applications / Workflow
+  app.get("/api/apps", listApps);
+  app.post("/api/apps", createApp);
+  app.get("/api/apps/:id", getApp);
+  app.post("/api/apps/:id/action", actOnApp);
+
   return app;
 }
