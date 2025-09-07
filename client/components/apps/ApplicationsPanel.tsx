@@ -118,7 +118,7 @@ export function ApplicationsPanel() {
               </div>
             </div>
             <div className="mt-4 flex items-center gap-3">
-              <button onClick={submitFRA} disabled={submitting} className="rounded-md bg-emerald-600 text-white px-4 py-2">Submit Application</button>
+              <button onClick={submitFRA} disabled={submitting} className="rounded-md bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2">Submit Application</button>
               <div className="text-sm text-muted-foreground">After submission, the application will be forwarded to the next ministry for review.</div>
             </div>
           </div>
