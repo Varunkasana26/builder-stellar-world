@@ -23,7 +23,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur supports-[backdrop-filter]:bg-background/70 bg-background/80 border-b">
       <div className="container flex h-16 items-center justify-between">
-        <Link to={user ? "/" : "/login"} className="flex items-center gap-2">
+        <Link to={user ? "/dashboard" : "/login"} className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-md bg-gradient-to-br from-emerald-600 to-green-700" />
           <span className="font-extrabold tracking-tight text-xl">FRA Atlas</span>
         </Link>
