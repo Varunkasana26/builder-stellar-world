@@ -1,11 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-type User = { username: string } | null;
+type User = { username: string; ministry?: string; organization?: string } | null;
+
+interface LoginMeta {
+  ministry?: string;
+  organization?: string;
+}
 
 interface AuthContextValue {
   user: User;
-  login: (username: string, password: string) => Promise<void>;
+  login: (username: string, password: string, meta?: LoginMeta) => Promise<void>;
   logout: () => void;
 }
 
@@ -21,21 +26,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (raw) {
       try {
         const parsed = JSON.parse(raw);
-        if (parsed?.username) setUser({ username: parsed.username });
+        if (parsed?.username) setUser({ username: parsed.username, ministry: parsed.ministry, organization: parsed.organization });
       } catch (e) {
         // ignore
       }
     }
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = async (username: string, password: string, meta?: LoginMeta) => {
     // Mock authentication: accept any non-empty username/password
     if (!username || !password) throw new Error("Invalid credentials");
 
     // Create a deterministic token for demo purposes
     const token = btoa(`${username}:${Date.now()}`);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ username, token }));
-    setUser({ username });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ username, token, ministry: meta?.ministry, organization: meta?.organization }));
+    setUser({ username, ministry: meta?.ministry, organization: meta?.organization });
     // simulate network latency
     await new Promise((r) => setTimeout(r, 350));
   };
