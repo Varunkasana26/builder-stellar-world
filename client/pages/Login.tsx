@@ -26,7 +26,7 @@ export default function Login() {
     setLoading(true);
     try {
       await auth.login(username.trim(), password.trim(), { ministry, organization: organization.trim() });
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
     } catch (err: any) {
       setError(err?.message ?? "Login failed");
     } finally {
