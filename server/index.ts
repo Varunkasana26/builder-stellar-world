@@ -5,6 +5,7 @@ import { handleDemo } from "./routes/demo";
 import { getForestBoundary, getSampleClaims } from "./routes/geo";
 import { analyzeClaim } from "./routes/analysis";
 import { getStatsOverview } from "./routes/stats";
+import { listApps, createApp, getApp, actOnApp } from "./routes/apps";
 
 export function createServer() {
   const app = express();
