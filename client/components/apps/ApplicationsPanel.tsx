@@ -10,6 +10,11 @@ export function ApplicationsPanel() {
   const [selected, setSelected] = useState<AppItem | null>(null);
   const auth = useAuth();
 
+  const [fraName, setFraName] = useState("");
+  const [fraArea, setFraArea] = useState<number | "">("");
+  const [fraNotes, setFraNotes] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
   const fetchApps = async () => {
     setLoading(true);
     try {
@@ -49,6 +54,40 @@ export function ApplicationsPanel() {
     fetchApps();
   };
 
+  const submitFRA = async () => {
+    if (!fraName || !fraArea) return alert("Please provide claimant name and area");
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/apps", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ claimantName: fraName, areaHa: Number(fraArea), geometry: null }),
+      });
+      const created = await res.json();
+
+      // If current user is Gram Sabha, auto-approve and advance
+      if (auth.user?.ministry === "Gram Sabha") {
+        await fetch(`/api/apps/${created.id}/action`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "approve", ministry: "Gram Sabha", signer: auth.user?.username }),
+        });
+      }
+
+      // Refresh list
+      await fetchApps();
+      setFraName("");
+      setFraArea("");
+      setFraNotes("");
+      alert("Application submitted successfully");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to submit application");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="grid md:grid-cols-3 gap-6">
       <div className="md:col-span-2">
@@ -59,6 +98,31 @@ export function ApplicationsPanel() {
             <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
           </div>
         </div>
+
+        {/* FRA form for Gram Sabha users */}
+        {auth.user?.ministry === "Gram Sabha" && (
+          <div className="rounded-lg border p-4 mb-4 bg-emerald-50">
+            <h4 className="font-semibold">Create FRA Application (Gram Sabha)</h4>
+            <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label className="text-sm text-muted-foreground">Claimant Name</label>
+                <input value={fraName} onChange={(e) => setFraName(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+              </div>
+              <div>
+                <label className="text-sm text-muted-foreground">Area (ha)</label>
+                <input type="number" value={fraArea as any} onChange={(e) => setFraArea(e.target.value ? Number(e.target.value) : "")} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+              </div>
+              <div>
+                <label className="text-sm text-muted-foreground">Notes</label>
+                <input value={fraNotes} onChange={(e) => setFraNotes(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+              </div>
+            </div>
+            <div className="mt-4 flex items-center gap-3">
+              <button onClick={submitFRA} disabled={submitting} className="rounded-md bg-emerald-600 text-white px-4 py-2">Submit Application</button>
+              <div className="text-sm text-muted-foreground">After submission, the application will be forwarded to the next ministry for review.</div>
+            </div>
+          </div>
+        )}
 
         <div className="space-y-3">
           {loading && <div className="text-sm text-muted-foreground">Loading…</div>}
