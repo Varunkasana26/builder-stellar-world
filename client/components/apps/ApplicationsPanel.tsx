@@ -144,7 +144,7 @@ export function ApplicationsPanel() {
                 <button onClick={() => setSelected(a)} className="text-sm underline">View</button>
                 {canAct(a) ? (
                   <div className="flex gap-2">
-                    <button onClick={() => act(a.id, "approve")} className="rounded-md bg-emerald-600 text-white px-3 py-1">Approve</button>
+                    <button onClick={() => act(a.id, "approve")} className="rounded-md bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1">Approve</button>
                     <button onClick={() => act(a.id, "reject")} className="rounded-md border px-3 py-1">Reject</button>
                   </div>
                 ) : (
