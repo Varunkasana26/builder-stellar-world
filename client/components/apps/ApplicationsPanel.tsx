@@ -94,7 +94,7 @@ export function ApplicationsPanel() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Applications</h3>
           <div className="flex items-center gap-3">
-            <button onClick={createMock} className="rounded-md bg-emerald-600 text-white px-3 py-1">Create Demo Application</button>
+            <button onClick={createMock} className="rounded-md bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1">Create Demo Application</button>
             <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
           </div>
         </div>
