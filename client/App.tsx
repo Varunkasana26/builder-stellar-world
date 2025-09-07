@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AuthProvider, ProtectedRoute } from "@/lib/auth";
@@ -28,12 +29,16 @@ const App = () => (
               <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route
-                  path="/"
+                  path="/dashboard"
                   element={
                     <ProtectedRoute>
-                      <Index />
+                      <Dashboard />
                     </ProtectedRoute>
                   }
+                />
+                <Route
+                  path="/"
+                  element={<Index />}
                 />
 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
