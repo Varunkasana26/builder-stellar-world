@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON, LayersControl } from "react-leaflet";
-import type { GeoJSON as GeoJSONType } from "geojson";
 
 export function AtlasMap() {
-  const [forest, setForest] = useState<GeoJSONType | null>(null);
-  const [claims, setClaims] = useState<GeoJSONType | null>(null);
+  const [forest, setForest] = useState<any | null>(null);
+  const [claims, setClaims] = useState<any | null>(null);
 
   useEffect(() => {
     fetch("/api/geo/forest-boundary").then(async (r) => setForest(await r.json()));
