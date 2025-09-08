@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/lib/auth";
 
 export default function FormC() {
-  const auth = useAuth();
   const navigate = useNavigate();
   const [village, setVillage] = useState("");
   const [members, setMembers] = useState("");
