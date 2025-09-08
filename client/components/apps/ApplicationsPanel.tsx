@@ -16,6 +16,7 @@ export function ApplicationsPanel() {
   const [submitting, setSubmitting] = useState(false);
   const [stageFilter, setStageFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [query, setQuery] = useState<string>("");
 
   // Multi-form support for Gram Sabha
   const [selectedForm, setSelectedForm] = useState<string | null>(null);
