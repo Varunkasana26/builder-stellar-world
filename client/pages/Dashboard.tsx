@@ -29,11 +29,11 @@ export default function Dashboard() {
         {auth.user?.organization === 'Gram Sabha' ? (
           <div className="grid lg:grid-cols-2 gap-6">
             <div>
-              <h2 className="text-lg font-semibold mb-3">Applications</h2>
+              <h2 className="text-lg font-semibold mb-3 whitespace-nowrap">Applications</h2>
               <ApplicationsPanel />
             </div>
             <div>
-              <h2 className="text-lg font-semibold mb-3">Appeals</h2>
+              <h2 className="text-lg font-semibold mb-3 whitespace-nowrap">Appeals</h2>
               <AppealsPanel />
             </div>
           </div>
