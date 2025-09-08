@@ -110,28 +110,185 @@ export function ApplicationsPanel() {
           </div>
         </div>
 
-        {/* FRA form for Gram Sabha users */}
+        {/* FRA / Claim forms for Gram Sabha users */}
         {auth.user?.organization === "Gram Sabha" && (
           <div className="rounded-lg border p-4 mb-4 bg-emerald-50">
-            <h4 className="font-semibold">Create FRA Application (Gram Sabha)</h4>
-            <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div>
-                <label className="text-sm text-muted-foreground">Claimant Name</label>
-                <input value={fraName} onChange={(e) => setFraName(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Area (ha)</label>
-                <input type="number" value={fraArea as any} onChange={(e) => setFraArea(e.target.value ? Number(e.target.value) : "")} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Notes</label>
-                <input value={fraNotes} onChange={(e) => setFraNotes(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+            <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
+
+            {/* Form selector */}
+            <div className="mt-3 mb-4">
+              <label className="text-sm text-muted-foreground">Choose form type</label>
+              <div className="mt-2 flex gap-2">
+                <button onClick={() => { setSelectedForm('A'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'A' ? 'bg-emerald-400 text-white' : 'border'}`}>Form A (Individual Claim)</button>
+                <button onClick={() => { setSelectedForm('B'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'B' ? 'bg-emerald-400 text-white' : 'border'}`}>Form B (Community Rights)</button>
+                <button onClick={() => { setSelectedForm('C'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'C' ? 'bg-emerald-400 text-white' : 'border'}`}>Form C (Community Forest Resource)</button>
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-3">
-              <button onClick={submitFRA} disabled={submitting} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Application</button>
-              <div className="text-sm text-muted-foreground">After submission, the application will be forwarded to the next ministry for review.</div>
+
+            {/* Dynamic form fields */}
+            {selectedForm === null ? (
+              <div className="text-sm text-muted-foreground">Select a form to begin filling the application.</div>
+            ) : (
+              <div className="mt-3">
+                {selectedForm === 'A' && (
+                  <div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <div>
+                        <label className="text-sm text-muted-foreground">Name of claimant(s)</label>
+                        <input value={formData.claimantName ?? ''} onChange={(e) => setFormData({ ...formData, claimantName: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                      <div>
+                        <label className="text-sm text-muted-foreground">Spouse</label>
+                        <input value={formData.spouse ?? ''} onChange={(e) => setFormData({ ...formData, spouse: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                      <div>
+                        <label className="text-sm text-muted-foreground">Father / Mother</label>
+                        <input value={formData.parent ?? ''} onChange={(e) => setFormData({ ...formData, parent: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                    </div>
+
+                    <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <div>
+                        <label className="text-sm text-muted-foreground">Village</label>
+                        <input value={formData.village ?? ''} onChange={(e) => setFormData({ ...formData, village: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                      <div>
+                        <label className="text-sm text-muted-foreground">Gram Panchayat</label>
+                        <input value={formData.gramPanchayat ?? ''} onChange={(e) => setFormData({ ...formData, gramPanchayat: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                      <div>
+                        <label className="text-sm text-muted-foreground">Tehsil / Taluka</label>
+                        <input value={formData.tehsil ?? ''} onChange={(e) => setFormData({ ...formData, tehsil: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                    </div>
+
+                    <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <div>
+                        <label className="text-sm text-muted-foreground">District</label>
+                        <input value={formData.district ?? ''} onChange={(e) => setFormData({ ...formData, district: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                      <div>
+                        <label className="text-sm text-muted-foreground">Scheduled Tribe (Yes/No)</label>
+                        <select value={formData.scheduled ?? 'no'} onChange={(e) => setFormData({ ...formData, scheduled: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background">
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="text-sm text-muted-foreground">Other family members (comma separated)</label>
+                        <input value={formData.family ?? ''} onChange={(e) => setFormData({ ...formData, family: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                    </div>
+
+                    <div className="mt-3">
+                      <label className="text-sm text-muted-foreground">Nature of claim / Details</label>
+                      <textarea value={formData.nature ?? ''} onChange={(e) => setFormData({ ...formData, nature: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={4}></textarea>
+                    </div>
+                  </div>
+                )}
+
+                {selectedForm === 'B' && (
+                  <div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-sm text-muted-foreground">Name of claimant community</label>
+                        <input value={formData.communityName ?? ''} onChange={(e) => setFormData({ ...formData, communityName: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                      <div>
+                        <label className="text-sm text-muted-foreground">Village</label>
+                        <input value={formData.village ?? ''} onChange={(e) => setFormData({ ...formData, village: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                      </div>
+                    </div>
+
+                    <div className="mt-3">
+                      <label className="text-sm text-muted-foreground">Nature of community rights / Details</label>
+                      <textarea value={formData.details ?? ''} onChange={(e) => setFormData({ ...formData, details: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={4}></textarea>
+                    </div>
+                  </div>
+                )}
+
+                {selectedForm === 'C' && (
+                  <div>
+                    <div>
+                      <label className="text-sm text-muted-foreground">Village / Gram Sabha</label>
+                      <input value={formData.village ?? ''} onChange={(e) => setFormData({ ...formData, village: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" />
+                    </div>
+                    <div className="mt-3">
+                      <label className="text-sm text-muted-foreground">Members list (attach in details)</label>
+                      <textarea value={formData.members ?? ''} onChange={(e) => setFormData({ ...formData, members: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={4}></textarea>
+                    </div>
+                    <div className="mt-3">
+                      <label className="text-sm text-muted-foreground">Map / Boundaries description</label>
+                      <textarea value={formData.boundary ?? ''} onChange={(e) => setFormData({ ...formData, boundary: e.target.value })} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={4}></textarea>
+                    </div>
+                  </div>
+                )}
+
+                <div className="mt-4 flex items-center gap-3">
+                  <button onClick={async () => {
+                    // build a minimal payload compatible with server
+                    const claimant = formData.claimantName || formData.communityName || formData.village || 'Unnamed Claim';
+                    const area = Number(formData.area) || 0;
+                    try {
+                      setSubmitting(true);
+                      await fetch('/api/apps', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ claimantName: claimant, areaHa: area, formType: selectedForm, formData }) });
+                      await fetchApps();
+                      setSelectedForm(null);
+                      setFormData({});
+                      alert('Application submitted');
+                    } catch (err) { console.error(err); alert('Failed to submit'); } finally { setSubmitting(false); }
+                  }} disabled={submitting} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Application</button>
+                  <button onClick={() => { setSelectedForm(null); setFormData({}); }} className="rounded-md border px-3 py-1">Cancel</button>
+                </div>
+              </div>
+            )}
+
+            {/* Appeals for decided applications (Gram Sabha can raise appeals on decided apps) */}
+            <div className="mt-6">
+              <h5 className="font-semibold">Decided Applications - Raise Appeal</h5>
+              <div className="mt-3 space-y-3">
+                {apps.filter((a) => a.canceled || a.currentStageIndex >= a.stages.length).map((a) => (
+                  <div key={a.id} className="rounded-lg border p-3 flex items-center justify-between">
+                    <div>
+                      <div className="font-semibold">{a.claimantName} <span className="text-xs text-muted-foreground">{a.id}</span></div>
+                      <div className="text-sm text-muted-foreground">{a.canceled ? 'Rejected' : 'Approved'}</div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => { setSelected(a); setAppealMessage(''); setAppealTarget('SDLC'); }} className="rounded-md border px-3 py-1">Select</button>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="mt-3">
+                  <label className="text-sm text-muted-foreground">Selected Application</label>
+                  <div className="mt-1 mb-2">{selected ? `${selected.claimantName} (${selected.id})` : <span className="text-xs text-muted-foreground">None selected</span>}</div>
+
+                  <label className="text-sm text-muted-foreground">Target Organization</label>
+                  <select value={appealTarget} onChange={(e) => setAppealTarget(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background">
+                    <option value="SDLC">Sub-Divisional Level Committee (SDLC)</option>
+                    <option value="DLC">District Level Committee (DLC)</option>
+                    <option value="MOTA">Ministry of Tribal Affairs (MOTA)</option>
+                  </select>
+
+                  <label className="text-sm text-muted-foreground mt-2">Message</label>
+                  <textarea value={appealMessage} onChange={(e) => setAppealMessage(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={4}></textarea>
+
+                  <div className="mt-3 flex items-center gap-3">
+                    <button onClick={async () => {
+                      if (!selected || !appealMessage) return alert('Select application and enter a message');
+                      try {
+                        await fetch('/api/appeals', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: selected.id, raisedBy: auth.user?.username, raisedOrg: auth.user?.organization, targetOrg: appealTarget, message: appealMessage }) });
+                        alert('Appeal submitted');
+                        setAppealMessage('');
+                        setSelected(null);
+                      } catch (err) { console.error(err); alert('Failed to submit appeal'); }
+                    }} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Appeal</button>
+                  </div>
+                </div>
+
+              </div>
             </div>
+
           </div>
         )}
 
