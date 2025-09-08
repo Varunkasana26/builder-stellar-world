@@ -71,7 +71,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   };
 
-  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, ready, login, logout }}>{children}</AuthContext.Provider>;
+};
+
+export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  const { user, ready } = ctx;
+  if (!ready) return null; // still initializing
+  if (!user) return <Navigate to="/login" replace />;
+  return <>{children}</>;
 };
 
 export function useAuth() {
