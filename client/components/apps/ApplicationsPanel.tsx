@@ -167,7 +167,7 @@ export function ApplicationsPanel() {
             {selectedForm === null ? (
               <div className="text-sm text-muted-foreground">Select a form to begin filling the application.</div>
             ) : (
-              <div className="mt-3">
+              <div className="mt-3 animate-fade-in-up">
                 {/* reuse dynamic fields from before */}
                 {selectedForm === 'A' && (
                   <div>
