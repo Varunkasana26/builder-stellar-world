@@ -49,7 +49,7 @@ export default function Mota() {
                 <div className="text-sm text-muted-foreground">Area: {a.areaHa} ha</div>
               </div>
               <div>
-                <button onClick={() => recommend(a.id)} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1">Run Recommendation</button>
+                <button onClick={() => recommend(a.id)} className="rounded-md btn-primary px-3 py-1">Run Recommendation</button>
               </div>
             </div>
           ))}
