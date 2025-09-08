@@ -75,6 +75,12 @@ export default function Ngo() {
                 <option value="MOTA">Ministry of Tribal Affairs (MOTA)</option>
               </select>
 
+              <label className="text-sm text-muted-foreground mt-2">Submission Type</label>
+              <select value={appealType} onChange={(e) => setAppealType(e.target.value as any)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background">
+                <option value="appeal">Appeal</option>
+                <option value="complaint">Complaint</option>
+              </select>
+
               <div className="mt-3 flex items-center gap-3">
                 <button onClick={sendAppeal} className="rounded-md btn-primary px-4 py-2">Submit Appeal</button>
                 <div className="text-sm text-muted-foreground">Appeals are recorded and can be reviewed by authorities.</div>
