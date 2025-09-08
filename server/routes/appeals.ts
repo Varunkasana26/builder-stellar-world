@@ -2,12 +2,13 @@ import { RequestHandler } from "express";
 
 interface Appeal {
   id: string;
-  appId: string;
+  appId?: string;
   raisedBy: string;
   raisedOrg?: string;
   targetOrg?: string;
-  type?: 'appeal' | 'complaint';
+  type?: 'appeal' | 'complaint' | 'suggestion';
   message: string;
+  purpose?: string;
   createdAt: string;
   replies?: { by: string; org?: string; message: string; createdAt: string }[];
 }
@@ -23,9 +24,12 @@ export const listAppeals: RequestHandler = (_req, res) => {
 };
 
 export const createAppeal: RequestHandler = (req, res) => {
-  const { appId, raisedBy, raisedOrg, targetOrg, type, message } = req.body as { appId: string; raisedBy: string; raisedOrg?: string; targetOrg?: string; type?: 'appeal'|'complaint'; message: string };
-  if (!appId || !raisedBy || !message) return res.status(400).json({ error: "Missing fields" });
-  const a: Appeal = { id: makeId(), appId, raisedBy, raisedOrg, targetOrg, type: type ?? 'appeal', message, createdAt: new Date().toISOString(), replies: [] };
+  const { appId, raisedBy, raisedOrg, targetOrg, type, message, purpose } = req.body as { appId?: string; raisedBy: string; raisedOrg?: string; targetOrg?: string; type?: 'appeal'|'complaint'|'suggestion'; message: string; purpose?: string };
+  // For appeals, appId is required. For complaints/suggestions it's optional.
+  if (!raisedBy || !message) return res.status(400).json({ error: "Missing fields" });
+  if ((type === 'appeal' || !type) && !appId) return res.status(400).json({ error: "appId is required for appeals" });
+
+  const a: Appeal = { id: makeId(), appId: appId ?? '', raisedBy, raisedOrg, targetOrg, type: type ?? 'appeal', message, purpose, createdAt: new Date().toISOString(), replies: [] };
   appeals.push(a);
   res.status(201).json(a);
 };
