@@ -111,9 +111,6 @@ export function ApplicationsPanel() {
 
   return (
     <div>
-      <div className="flex items-center justify-end mb-4">
-        <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
-      </div>
 
       {/* For Gram Sabha: show Create Application and Raise Appeal side-by-side */}
       {auth.user?.organization === "Gram Sabha" && (
