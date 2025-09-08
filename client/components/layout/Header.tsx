@@ -7,6 +7,7 @@ const nav = [
   { to: "/forest-map", label: "Forest Map", icon: 'map' },
   { to: "/analytics", label: "Analytics", icon: 'chart' },
   { to: "/fra-compliance", label: "FRA Compliance", icon: 'shield' },
+  { to: "/recommendations", label: "AI Recommendations", icon: 'chart' },
 ];
 
 function ThemeButton() {
