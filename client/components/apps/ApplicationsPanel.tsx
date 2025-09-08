@@ -111,11 +111,8 @@ export function ApplicationsPanel() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold">Applications</h3>
-        <div className="flex items-center gap-3">
-          <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
-        </div>
+      <div className="flex items-center justify-end mb-4">
+        <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
       </div>
 
       {/* For Gram Sabha: show Create Application and Raise Appeal side-by-side */}
