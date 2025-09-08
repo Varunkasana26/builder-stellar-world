@@ -8,15 +8,15 @@ export default function Dashboard() {
   const auth = useAuth();
 
   useEffect(() => {
-    document.title = `FRA Atlas — ${auth.user?.ministry ?? 'Dashboard'}`;
+    document.title = `FRA Atlas — ${auth.user?.organizationLabel ?? 'Dashboard'}`;
   }, [auth.user]);
 
   return (
     <main className="flex-1">
       <section className="container py-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">{auth.user?.ministry ?? 'Dashboard'}</h1>
-          <div className="text-sm text-muted-foreground">User: {auth.user?.username} {auth.user?.organization ? `— ${auth.user?.organization}` : ''}</div>
+          <h1 className="text-2xl font-bold">{auth.user?.organizationLabel ?? 'Dashboard'}</h1>
+          <div className="text-sm text-muted-foreground">User: {auth.user?.username} {auth.user?.organizationState ? `— ${auth.user?.organizationState}` : ''}</div>
         </div>
 
         <div className="mt-6">
