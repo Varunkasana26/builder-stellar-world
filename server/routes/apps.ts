@@ -45,14 +45,16 @@ export const getApp: RequestHandler = (req, res) => {
 };
 
 export const createApp: RequestHandler = (req, res) => {
-  const { claimantName, areaHa, geometry, flow } = req.body as {
+  const { claimantName, areaHa, geometry, flow, formType, formData } = req.body as {
     claimantName: string;
     areaHa: number;
     geometry: any;
     flow?: string[];
+    formType?: string;
+    formData?: any;
   };
 
-  if (!claimantName || !areaHa) {
+  if (!claimantName || areaHa === undefined || areaHa === null) {
     return res.status(400).json({ error: "Missing fields" });
   }
 
@@ -67,6 +69,8 @@ export const createApp: RequestHandler = (req, res) => {
     currentStageIndex: 0,
     canceled: false,
     createdAt: new Date().toISOString(),
+    formType: formType ?? undefined,
+    formData: formData ?? undefined,
   } as FRAApplication;
 
   applications.push(app);
