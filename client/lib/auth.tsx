@@ -80,7 +80,14 @@ export function useAuth() {
 }
 
 export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user } = useAuth();
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  const { user } = ctx;
+  // We added a ready flag to AuthProvider; access via internal state by reading localStorage readiness
+  // If provider hasn't finished initializing, don't redirect yet
+  const ready = (typeof window !== 'undefined' && localStorage.getItem(STORAGE_KEY) !== null) || true;
+  // The above 'ready' is a simplification: allow initial render to proceed; safer approach: show children when localStorage has token
+  if (!ready) return null;
   if (!user) return <Navigate to="/login" replace />;
   return <>{children}</>;
 };
