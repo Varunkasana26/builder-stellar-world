@@ -118,7 +118,7 @@
   }
 
   .hero-gradient {
-    background: linear-gradient(120deg, rgba(16,185,129,0.06), rgba(6,95,70,0.08), rgba(14,165,233,0.04));
+    background: linear-gradient(120deg, rgba(0,200,83,0.08), rgba(0,153,68,0.10), rgba(102,255,179,0.04));
     background-size: 200% 200%;
     animation: gradient-pan 10s ease infinite;
   }
