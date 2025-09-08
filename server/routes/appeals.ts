@@ -4,7 +4,8 @@ interface Appeal {
   id: string;
   appId: string;
   raisedBy: string;
-  organization?: string;
+  raisedOrg?: string;
+  targetOrg?: string;
   message: string;
   createdAt: string;
 }
@@ -20,9 +21,9 @@ export const listAppeals: RequestHandler = (_req, res) => {
 };
 
 export const createAppeal: RequestHandler = (req, res) => {
-  const { appId, raisedBy, organization, message } = req.body as { appId: string; raisedBy: string; organization?: string; message: string };
+  const { appId, raisedBy, raisedOrg, targetOrg, message } = req.body as { appId: string; raisedBy: string; raisedOrg?: string; targetOrg?: string; message: string };
   if (!appId || !raisedBy || !message) return res.status(400).json({ error: "Missing fields" });
-  const a: Appeal = { id: makeId(), appId, raisedBy, organization, message, createdAt: new Date().toISOString() };
+  const a: Appeal = { id: makeId(), appId, raisedBy, raisedOrg, targetOrg, message, createdAt: new Date().toISOString() };
   appeals.push(a);
   res.status(201).json(a);
 };
