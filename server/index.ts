@@ -6,7 +6,7 @@ import { getForestBoundary, getSampleClaims } from "./routes/geo";
 import { analyzeClaim } from "./routes/analysis";
 import { getStatsOverview } from "./routes/stats";
 import { listApps, createApp, getApp, actOnApp } from "./routes/apps";
-import { listAppeals, createAppeal } from "./routes/appeals";
+import { listAppeals, createAppeal, replyAppeal, reconsiderAppeal } from "./routes/appeals";
 
 export function createServer() {
   const app = express();
