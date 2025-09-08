@@ -11,6 +11,7 @@ interface LoginMeta {
 
 interface AuthContextValue {
   user: User;
+  ready?: boolean;
   login: (username: string, password: string, meta?: LoginMeta) => Promise<void>;
   logout: () => void;
 }
