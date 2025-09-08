@@ -113,6 +113,12 @@
     @apply inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 font-medium shadow-lg transform transition-transform hover:scale-105 hover:-translate-y-0.5;
   }
 
+  .app-form-panel input,
+  .app-form-panel select,
+  .app-form-panel textarea {
+    @apply bg-white text-black;
+  }
+
   .stat-animate > * {
     @apply animate-fade-in-up;
   }
