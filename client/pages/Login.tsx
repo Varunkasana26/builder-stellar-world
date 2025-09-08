@@ -36,7 +36,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-green-50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary to-accent">
       <div className="w-full max-w-4xl p-6 rounded-2xl bg-card border shadow-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left: Ministry selection */}
@@ -110,7 +110,7 @@ export default function Login() {
               <div className="flex items-center justify-between">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2 font-medium disabled:opacity-50"
+                  className="inline-flex items-center justify-center rounded-md btn-primary px-4 py-2 font-medium disabled:opacity-50"
                   disabled={loading}
                 >
                   {loading ? "Signing in…" : "Sign in"}
