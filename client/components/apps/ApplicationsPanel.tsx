@@ -121,7 +121,7 @@ export function ApplicationsPanel() {
         </div>
 
         {/* FRA form for Gram Sabha users */}
-        {auth.user?.ministry === "Gram Sabha" && (
+        {auth.user?.organization === "Gram Sabha" && (
           <div className="rounded-lg border p-4 mb-4 bg-emerald-50">
             <h4 className="font-semibold">Create FRA Application (Gram Sabha)</h4>
             <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
