@@ -45,7 +45,7 @@ export default function Index() {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-200/40 to-green-200/40 rounded-3xl blur-2xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-accent/40 rounded-3xl blur-2xl" />
             <div className="relative rounded-2xl border bg-card p-4 shadow-lg">
               <AtlasMap />
             </div>
