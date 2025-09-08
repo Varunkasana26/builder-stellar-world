@@ -119,7 +119,7 @@ export function ApplicationsPanel() {
             <div className="rounded-lg border p-4 bg-secondary">
               <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
               <div className="mt-4 flex flex-col gap-3">
-                <a href="/forms/a" className="rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                <button type="button" onClick={() => { setSelectedForm('A'); setFormData({}); }} className="w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-semibold">Form A</div>
@@ -127,9 +127,9 @@ export function ApplicationsPanel() {
                     </div>
                     <div className="text-xs text-muted-foreground">Open</div>
                   </div>
-                </a>
+                </button>
 
-                <a href="/forms/b" className="rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                <button type="button" onClick={() => { setSelectedForm('B'); setFormData({}); }} className="w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-semibold">Form B</div>
@@ -137,9 +137,9 @@ export function ApplicationsPanel() {
                     </div>
                     <div className="text-xs text-muted-foreground">Open</div>
                   </div>
-                </a>
+                </button>
 
-                <a href="/forms/c" className="rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                <button type="button" onClick={() => { setSelectedForm('C'); setFormData({}); }} className="w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-semibold">Form C</div>
@@ -147,7 +147,7 @@ export function ApplicationsPanel() {
                     </div>
                     <div className="text-xs text-muted-foreground">Open</div>
                   </div>
-                </a>
+                </button>
               </div>
             </div>
           </div>
