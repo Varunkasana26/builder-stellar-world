@@ -119,7 +119,7 @@ export function ApplicationsPanel() {
             <div className="rounded-lg border p-4 bg-secondary">
               <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
               <div className="mt-4 flex flex-col gap-3">
-                <button type="button" onClick={() => { setSelectedForm('A'); setFormData({}); }} className="w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                <button type="button" onClick={() => { setSelectedForm('A'); setFormData({}); }} className={`w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60 ${selectedForm === 'A' ? 'ring-2 ring-primary/40' : ''}`}>
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-semibold">Form A</div>
