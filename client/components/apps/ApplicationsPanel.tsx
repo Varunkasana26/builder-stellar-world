@@ -167,33 +167,81 @@ export function ApplicationsPanel() {
 
         <div className="space-y-3">
           {loading && <div className="text-sm text-muted-foreground">Loading…</div>}
-          {filteredApps.map((a) => (
-            <div key={a.id} className="rounded-lg border p-3 flex items-start justify-between">
-              <div>
-                <div className="font-semibold">{a.claimantName} <span className="text-xs text-muted-foreground">{a.id}</span></div>
-                <div className="text-sm text-muted-foreground">Area: {a.areaHa} ha</div>
-                <div className="mt-2 flex gap-2">
-                  {a.stages.map((s, i) => (
-                    <div key={i} className={`px-2 py-1 rounded ${s.status === 'approved' ? 'bg-emerald-100 text-emerald-600' : s.status === 'rejected' ? 'bg-destructive text-destructive-foreground' : 'bg-slate-50 text-muted-foreground'}`}>
-                      {s.ministry}: {s.status}
+
+          {stageFilter !== 'all' ? (
+            // Show split columns for the selected stage: approved vs rejected
+            (() => {
+              const approved = apps.filter((a) => a.stages.some((s) => s.ministry === stageFilter && s.status === 'approved'));
+              const rejected = apps.filter((a) => a.stages.some((s) => s.ministry === stageFilter && s.status === 'rejected'));
+              return (
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="text-sm font-semibold mb-2">Approved at {stageFilter}</h4>
+                    <div className="space-y-3">
+                      {approved.map((a) => (
+                        <div key={a.id} className="rounded-lg border p-3 flex items-start justify-between">
+                          <div>
+                            <div className="font-semibold">{a.claimantName} <span className="text-xs text-muted-foreground">{a.id}</span></div>
+                            <div className="text-sm text-muted-foreground">Area: {a.areaHa} ha</div>
+                          </div>
+                          <div>
+                            <button onClick={() => setSelected(a)} className="text-sm underline">View</button>
+                          </div>
+                        </div>
+                      ))}
+                      {approved.length === 0 && <div className="text-sm text-muted-foreground">No approved applications</div>}
                     </div>
-                  ))}
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-semibold mb-2">Rejected at {stageFilter}</h4>
+                    <div className="space-y-3">
+                      {rejected.map((a) => (
+                        <div key={a.id} className="rounded-lg border p-3 flex items-start justify-between">
+                          <div>
+                            <div className="font-semibold">{a.claimantName} <span className="text-xs text-muted-foreground">{a.id}</span></div>
+                            <div className="text-sm text-muted-foreground">Area: {a.areaHa} ha</div>
+                          </div>
+                          <div>
+                            <button onClick={() => setSelected(a)} className="text-sm underline">View</button>
+                          </div>
+                        </div>
+                      ))}
+                      {rejected.length === 0 && <div className="text-sm text-muted-foreground">No rejected applications</div>}
+                    </div>
+                  </div>
+                </div>
+              );
+            })()
+          ) : (
+            filteredApps.map((a) => (
+              <div key={a.id} className="rounded-lg border p-3 flex items-start justify-between">
+                <div>
+                  <div className="font-semibold">{a.claimantName} <span className="text-xs text-muted-foreground">{a.id}</span></div>
+                  <div className="text-sm text-muted-foreground">Area: {a.areaHa} ha</div>
+                  <div className="mt-2 flex gap-2">
+                    {a.stages.map((s, i) => (
+                      <div key={i} className={`px-2 py-1 rounded ${s.status === 'approved' ? 'bg-emerald-100 text-emerald-600' : s.status === 'rejected' ? 'bg-destructive text-destructive-foreground' : 'bg-slate-50 text-muted-foreground'}`}>
+                        {s.ministry}: {s.status}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-end gap-2">
+                  <button onClick={() => setSelected(a)} className="text-sm underline">View</button>
+                  {canAct(a) ? (
+                    <div className="flex gap-2">
+                      <button onClick={() => act(a.id, "approve")} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1">Approve</button>
+                      <button onClick={() => act(a.id, "reject")} className="rounded-md border px-3 py-1">Reject</button>
+                    </div>
+                  ) : (
+                    <div className="text-xs text-muted-foreground">{a.canceled ? 'Canceled' : 'No action available'}</div>
+                  )}
                 </div>
               </div>
-
-              <div className="flex flex-col items-end gap-2">
-                <button onClick={() => setSelected(a)} className="text-sm underline">View</button>
-                {canAct(a) ? (
-                  <div className="flex gap-2">
-                    <button onClick={() => act(a.id, "approve")} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1">Approve</button>
-                    <button onClick={() => act(a.id, "reject")} className="rounded-md border px-3 py-1">Reject</button>
-                  </div>
-                ) : (
-                  <div className="text-xs text-muted-foreground">{a.canceled ? 'Canceled' : 'No action available'}</div>
-                )}
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 
