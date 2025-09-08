@@ -65,6 +65,13 @@ export default function Ngo() {
               <label className="text-sm text-muted-foreground">Message</label>
               <textarea value={message} onChange={(e) => setMessage(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={5}></textarea>
 
+              <label className="text-sm text-muted-foreground mt-2">Target Organization</label>
+              <select value={targetOrg} onChange={(e) => setTargetOrg(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background">
+                <option value="SDLC">Sub-Divisional Level Committee (SDLC)</option>
+                <option value="DLC">District Level Committee (DLC)</option>
+                <option value="MOTA">Ministry of Tribal Affairs (MOTA)</option>
+              </select>
+
               <div className="mt-3 flex items-center gap-3">
                 <button onClick={sendAppeal} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Appeal</button>
                 <div className="text-sm text-muted-foreground">Appeals are recorded and can be reviewed by authorities.</div>
