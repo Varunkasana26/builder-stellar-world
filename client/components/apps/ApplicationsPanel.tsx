@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
 
 type AppStage = { ministry: string; status: string; signedBy?: string; timestamp?: string; reason?: string };
