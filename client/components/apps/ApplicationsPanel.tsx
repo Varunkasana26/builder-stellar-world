@@ -302,6 +302,9 @@ export function ApplicationsPanel() {
         )}
 
         <div className="mb-4 flex items-center gap-3">
+          <label className="text-sm text-muted-foreground">Search</label>
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search by ID or claimant" className="rounded-md border px-3 py-1 bg-background" />
+
           <label className="text-sm text-muted-foreground">Stage</label>
           <select className="rounded-md border px-3 py-1 bg-background" onChange={(e) => setStageFilter(e.target.value)} value={stageFilter}>
             <option value="all">All</option>
