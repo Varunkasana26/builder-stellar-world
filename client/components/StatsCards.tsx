@@ -29,7 +29,7 @@ export function StatsCards() {
       {items.map((it, idx) => (
         <div
           key={it.label}
-          className="rounded-xl border p-4 bg-gradient-to-br from-emerald-400/20 to-emerald-300/20 hover:shadow-lg transform hover:-translate-y-1 transition-all"
+          className="rounded-xl border p-4 bg-gradient-to-br from-primary/20 to-accent/20 hover:shadow-lg transform hover:-translate-y-1 transition-all"
           style={{ animationDelay: `${idx * 60}ms` }}
         >
           <div className="text-xs text-muted-foreground">{it.label}</div>
