@@ -14,6 +14,27 @@ export function ApplicationsPanel() {
   const [fraArea, setFraArea] = useState<number | "">("");
   const [fraNotes, setFraNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [stageFilter, setStageFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+
+  const filteredApps = apps.filter((a) => {
+    // stage filter
+    if (stageFilter !== "all") {
+      const hasStage = a.stages.some((s) => s.ministry === stageFilter && s.status);
+      if (!hasStage) return false;
+    }
+    // status filter
+    if (statusFilter === "pending") {
+      if (!a.stages.some((s) => s.status === "pending")) return false;
+    }
+    if (statusFilter === "approved") {
+      if (!a.stages.some((s) => s.status === "approved")) return false;
+    }
+    if (statusFilter === "rejected") {
+      if (!a.stages.some((s) => s.status === "rejected")) return false;
+    }
+    return true;
+  });
 
   const fetchApps = async () => {
     setLoading(true);
