@@ -40,6 +40,8 @@ const App = () => (
                     </ProtectedRoute>
                   }
                 />
+                <Route path="/mota" element={<ProtectedRoute><Mota /></ProtectedRoute>} />
+                <Route path="/ngo" element={<ProtectedRoute><Ngo /></ProtectedRoute>} />
                 <Route
                   path="/"
                   element={<Index />}
