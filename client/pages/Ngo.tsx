@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
+import { useEffect, useState } from "react";
 
 export default function Ngo() {
   const auth = useAuth();
   const [apps, setApps] = useState<any[]>([]);
   const [message, setMessage] = useState("");
   const [selectedApp, setSelectedApp] = useState<string | null>(null);
+  const [targetOrg, setTargetOrg] = useState<string>("SDLC");
 
   useEffect(() => {
     (async () => {
