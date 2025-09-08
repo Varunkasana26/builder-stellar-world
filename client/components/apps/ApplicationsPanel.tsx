@@ -192,6 +192,7 @@ export function ApplicationsPanel() {
                     if (!selected || !appealMessage) return alert('Select application and enter a message');
                     try {
                       await fetch('/api/appeals', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: selected.id, raisedBy: auth.user?.username, raisedOrg: auth.user?.organization, targetOrg: appealTarget, message: appealMessage }) });
+                      try { localStorage.setItem('fra_appeal_created', JSON.stringify({ ts: Date.now() })); } catch (e) {}
                       alert('Appeal submitted');
                       setAppealMessage('');
                       setSelected(null);
