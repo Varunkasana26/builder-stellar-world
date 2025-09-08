@@ -32,7 +32,7 @@ export default function Login() {
     setError(null);
     setLoading(true);
     try {
-      await auth.login(username.trim(), password.trim(), { ministry: undefined, organization: organization, organizationState: stateName });
+      await auth.login(username.trim(), password.trim(), { organization: organization, organizationState: stateName, organizationLabel });
       navigate("/dashboard", { replace: true });
     } catch (err: any) {
       setError(err?.message ?? "Login failed");
