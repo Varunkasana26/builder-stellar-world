@@ -292,9 +292,10 @@ export function ApplicationsPanel() {
         </div>
       )}
 
-      <div className="mb-4 flex items-center gap-3">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
         <label className="text-sm text-muted-foreground">Search</label>
         <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search by ID or claimant" className="rounded-md border px-3 py-1 bg-background" />
+        <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
 
         <label className="text-sm text-muted-foreground">Stage</label>
         <select className="rounded-md border px-3 py-1 bg-background" onChange={(e) => setStageFilter(e.target.value)} value={stageFilter}>
