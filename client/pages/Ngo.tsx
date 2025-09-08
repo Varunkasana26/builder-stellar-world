@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
+import AppealsPanel from "@/components/apps/AppealsPanel";
 
 export default function Ngo() {
   const auth = useAuth();
