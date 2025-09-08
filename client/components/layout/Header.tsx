@@ -82,7 +82,9 @@ export function Header() {
               </Link>
             ) : (
               <div className="flex items-center gap-3">
-                <div className="text-sm text-muted-foreground">{user.username} <span className="text-xs text-muted-foreground block">{user.ministry}</span></div>
+                <div className="text-sm text-muted-foreground">{user.username} <span className="text-xs text-muted-foreground block">{user.organizationLabel ?? user.organization}{user.organizationState ? ` — ${user.organizationState}` : ''}</span></div>
+                {user.organization === 'MOTA' && <Link to="/mota" className="text-sm underline">MOTA</Link>}
+                {user.organization === 'NGO' && <Link to="/ngo" className="text-sm underline">NGO</Link>}
                 <button
                   onClick={onLogout}
                   className="inline-flex items-center justify-center rounded-md bg-primary hover:bg-emerald-600 text-primary-foreground px-3 py-2 font-medium transition transform hover:-translate-y-0.5"
