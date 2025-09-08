@@ -33,6 +33,8 @@ function makeId() {
   return `APP-${Math.random().toString(36).slice(2, 9).toUpperCase()}`;
 }
 
+export const listAppsInternal = () => applications;
+
 export const listApps: RequestHandler = (_req, res) => {
   res.json(applications);
 };
