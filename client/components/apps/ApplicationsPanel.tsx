@@ -118,16 +118,16 @@ export function ApplicationsPanel() {
 
         {/* FRA / Claim forms for Gram Sabha users */}
         {auth.user?.organization === "Gram Sabha" && (
-          <div className="rounded-lg border p-4 mb-4 bg-emerald-50">
+          <div className="rounded-lg border p-4 mb-4 bg-secondary">
             <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
 
             {/* Form selector */}
             <div className="mt-3 mb-4">
               <label className="text-sm text-muted-foreground">Choose form type</label>
               <div className="mt-2 flex gap-2">
-                <button onClick={() => { setSelectedForm('A'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'A' ? 'bg-emerald-400 text-white' : 'border'}`}>Form A (Individual Claim)</button>
-                <button onClick={() => { setSelectedForm('B'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'B' ? 'bg-emerald-400 text-white' : 'border'}`}>Form B (Community Rights)</button>
-                <button onClick={() => { setSelectedForm('C'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'C' ? 'bg-emerald-400 text-white' : 'border'}`}>Form C (Community Forest Resource)</button>
+                <button onClick={() => { setSelectedForm('A'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'A' ? 'btn-primary' : 'border'}`}>Form A (Individual Claim)</button>
+                <button onClick={() => { setSelectedForm('B'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'B' ? 'btn-primary' : 'border'}`}>Form B (Community Rights)</button>
+                <button onClick={() => { setSelectedForm('C'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'C' ? 'btn-primary' : 'border'}`}>Form C (Community Forest Resource)</button>
               </div>
             </div>
 
@@ -243,7 +243,7 @@ export function ApplicationsPanel() {
                       setFormData({});
                       alert('Application submitted');
                     } catch (err) { console.error(err); alert('Failed to submit'); } finally { setSubmitting(false); }
-                  }} disabled={submitting} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Application</button>
+                  }} disabled={submitting} className="btn-primary px-4 py-2">Submit Application</button>
                   <button onClick={() => { setSelectedForm(null); setFormData({}); }} className="rounded-md border px-3 py-1">Cancel</button>
                 </div>
               </div>
@@ -288,7 +288,7 @@ export function ApplicationsPanel() {
                         setAppealMessage('');
                         setSelected(null);
                       } catch (err) { console.error(err); alert('Failed to submit appeal'); }
-                    }} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Appeal</button>
+                    }} className="btn-primary px-4 py-2">Submit Appeal</button>
                   </div>
                 </div>
 
@@ -374,7 +374,7 @@ export function ApplicationsPanel() {
                   <div className="text-sm text-muted-foreground">Area: {a.areaHa} ha</div>
                   <div className="mt-2 flex gap-2">
                     {a.stages.map((s, i) => (
-                      <div key={i} className={`px-2 py-1 rounded ${s.status === 'approved' ? 'bg-emerald-100 text-emerald-600' : s.status === 'rejected' ? 'bg-destructive text-destructive-foreground' : 'bg-slate-50 text-muted-foreground'}`}>
+                      <div key={i} className={`px-2 py-1 rounded ${s.status === 'approved' ? 'bg-primary/20 text-primary' : s.status === 'rejected' ? 'bg-destructive text-destructive-foreground' : 'bg-slate-50 text-muted-foreground'}`}>
                         {s.ministry}: {s.status}
                       </div>
                     ))}
@@ -385,7 +385,7 @@ export function ApplicationsPanel() {
                   <button onClick={() => setSelected(a)} className="text-sm underline">View</button>
                   {canAct(a) ? (
                     <div className="flex gap-2">
-                      <button onClick={() => act(a.id, "approve")} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1">Approve</button>
+                      <button onClick={() => act(a.id, "approve")} className="rounded-md btn-primary px-3 py-1">Approve</button>
                       <button onClick={() => act(a.id, "reject")} className="rounded-md border px-3 py-1">Reject</button>
                     </div>
                   ) : (
