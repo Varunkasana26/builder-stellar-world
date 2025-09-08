@@ -54,6 +54,14 @@ export function ApplicationsPanel() {
 
   useEffect(() => {
     fetchApps();
+
+    const handler = (e: StorageEvent) => {
+      if (e.key === 'fra_app_created') {
+        fetchApps();
+      }
+    };
+    window.addEventListener('storage', handler);
+    return () => window.removeEventListener('storage', handler);
   }, []);
 
   const canAct = (app: AppItem) => {
