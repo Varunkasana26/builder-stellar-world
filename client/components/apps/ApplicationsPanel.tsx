@@ -18,9 +18,6 @@ export function ApplicationsPanel() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [query, setQuery] = useState<string>("");
 
-  // Multi-form support for Gram Sabha
-  const [selectedForm, setSelectedForm] = useState<string | null>(null);
-  const [formData, setFormData] = useState<any>({});
   const [appealMessage, setAppealMessage] = useState("");
   const [appealTarget, setAppealTarget] = useState<string>("SDLC");
 
