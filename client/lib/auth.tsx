@@ -21,6 +21,7 @@ const STORAGE_KEY = "fra_auth_token";
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -32,6 +33,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // ignore
       }
     }
+    setReady(true);
+
+    // respond to storage changes (login in other tab)
+    const handler = () => {
+      const r = localStorage.getItem(STORAGE_KEY);
+      if (r) {
+        try {
+          const parsed = JSON.parse(r);
+          if (parsed?.username) setUser({ username: parsed.username, organization: parsed.organization, organizationLabel: parsed.organizationLabel, organizationState: parsed.organizationState });
+        } catch (e) {
+          // ignore
+        }
+      } else {
+        setUser(null);
+      }
+    };
+    window.addEventListener('storage', handler);
+    return () => window.removeEventListener('storage', handler);
   }, []);
 
   const login = async (username: string, password: string, meta?: LoginMeta) => {
