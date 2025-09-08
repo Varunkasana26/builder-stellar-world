@@ -134,7 +134,7 @@ export function ApplicationsPanel() {
                   </div>
                 </a>
 
-                <button type="button" onClick={() => { setSelectedForm('B'); setFormData({}); }} className={`w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60 ${selectedForm === 'B' ? 'ring-2 ring-primary/40' : ''}`}>
+                <a href="/forms/b" target="_blank" rel="noopener noreferrer" className="w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-semibold">Form B</div>
@@ -142,7 +142,7 @@ export function ApplicationsPanel() {
                     </div>
                     <div className="text-xs text-muted-foreground">Open</div>
                   </div>
-                </button>
+                </a>
 
                 <button type="button" onClick={() => { setSelectedForm('C'); setFormData({}); }} className={`w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60 ${selectedForm === 'C' ? 'ring-2 ring-primary/40' : ''}`}>
                   <div className="flex items-center justify-between">
