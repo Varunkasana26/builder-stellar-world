@@ -25,6 +25,8 @@ export function ApplicationsPanel() {
   const [appealTarget, setAppealTarget] = useState<string>("SDLC");
 
   const filteredApps = apps.filter((a) => {
+    // search query
+    if (query && !(`${a.id}`.toLowerCase().includes(query.toLowerCase()) || `${a.claimantName}`.toLowerCase().includes(query.toLowerCase()))) return false;
     // stage filter
     if (stageFilter !== "all") {
       const hasStage = a.stages.some((s) => s.ministry === stageFilter && s.status);
