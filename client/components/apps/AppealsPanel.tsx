@@ -23,7 +23,16 @@ export default function AppealsPanel() {
     }
   };
 
-  useEffect(() => { fetchAppeals(); }, []);
+  useEffect(() => {
+    fetchAppeals();
+    const handler = (e: StorageEvent) => {
+      if (e.key === 'fra_appeal_created' || e.key === 'fra_app_created') {
+        fetchAppeals();
+      }
+    };
+    window.addEventListener('storage', handler);
+    return () => window.removeEventListener('storage', handler);
+  }, []);
 
   const sendReply = async () => {
     if (!selected || !reply) return alert('Select appeal and enter reply');
