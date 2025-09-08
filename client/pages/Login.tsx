@@ -2,17 +2,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 
-const MINISTRY_OPTIONS = [
-  "Forest Ministry",
-  "Central Ministry",
-  "State Forest Department",
+const ORG_OPTIONS = [
   "Gram Sabha",
-  "Other",
+  "Sub-Divisional Level Committee (SDLC)",
+  "District Level Committee (DLC)",
+  "Ministry of Tribal Affairs (MOTA)",
+  "NGO",
 ];
 
 export default function Login() {
-  const [ministry, setMinistry] = useState<string>(MINISTRY_OPTIONS[0]);
-  const [organization, setOrganization] = useState("");
+  const [organization, setOrganization] = useState<string>(ORG_OPTIONS[0]);
+  const [stateName, setStateName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const auth = useAuth();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
