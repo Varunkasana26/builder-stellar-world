@@ -152,9 +152,8 @@ export function ApplicationsPanel() {
             </div>
           </div>
 
-          <div className="rounded-lg border p-4 bg-secondary">
-            <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
-
+          <div className="rounded-lg border p-4 bg-white text-black app-form-panel">
+            <h4 className="font-semibold">Application Form</h4>
 
             {selectedForm === null ? (
               <div className="text-sm text-muted-foreground">Select a form to begin filling the application.</div>
