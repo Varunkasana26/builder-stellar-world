@@ -4,10 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@/lib/theme";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/#atlas", label: "Atlas" },
-  { to: "/#analysis", label: "AI Analysis" },
-  { to: "/#about", label: "About" },
+  { to: "/forest-map", label: "Forest Map", icon: 'map' },
+  { to: "/analytics", label: "Analytics", icon: 'chart' },
+  { to: "/fra-compliance", label: "FRA Compliance", icon: 'shield' },
 ];
 
 function ThemeButton() {
