@@ -79,6 +79,11 @@ export default function Ngo() {
             </div>
           </div>
         </div>
+
+        <div className="mt-6">
+          <h2 className="text-lg font-semibold mb-3">Appeals Assigned to NGO</h2>
+          <AppealsPanel />
+        </div>
       </section>
     </main>
   );
