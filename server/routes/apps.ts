@@ -20,6 +20,8 @@ interface FRAApplication {
   currentStageIndex: number; // points to next stage to act on
   canceled?: boolean;
   createdAt: string;
+  formType?: string;
+  formData?: any;
 }
 
 // In-memory store for demo
