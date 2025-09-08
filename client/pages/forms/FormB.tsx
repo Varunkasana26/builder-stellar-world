@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/lib/auth";
 
 export default function FormB() {
-  const auth = useAuth();
   const navigate = useNavigate();
   const [communityName, setCommunityName] = useState("");
   const [village, setVillage] = useState("");
