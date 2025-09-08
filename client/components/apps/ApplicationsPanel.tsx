@@ -321,6 +321,33 @@ export function ApplicationsPanel() {
         <div className="ml-auto text-sm text-muted-foreground">Showing {filteredApps.length} applications</div>
       </div>
 
+      {selected && (
+        <div className="rounded-lg border p-4 mb-4">
+          <div className="flex items-start justify-between">
+            <div>
+              <h4 className="font-semibold">Application Details</h4>
+              <div className="mt-2 text-sm">
+                <div><strong>ID:</strong> {selected.id}</div>
+                <div><strong>Claimant:</strong> {selected.claimantName}</div>
+                <div><strong>Area (ha):</strong> {selected.areaHa}</div>
+                <div className="mt-2">
+                  <strong>Stages:</strong>
+                  <ul className="mt-2 list-disc list-inside">
+                    {selected.stages.map((s, i) => (
+                      <li key={i}>{s.ministry}: {s.status} {s.signedBy ? `by ${s.signedBy}` : ''} {s.reason ? ` — ${s.reason}` : ''}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-3 text-xs text-muted-foreground">Created: {selected.createdAt}</div>
+              </div>
+            </div>
+            <div>
+              <button onClick={() => setSelected(null)} className="text-sm underline">Close</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-3">
         {loading && <div className="text-sm text-muted-foreground">Loading…</div>
 
