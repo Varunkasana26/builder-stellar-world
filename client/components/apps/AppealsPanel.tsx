@@ -40,6 +40,7 @@ export default function AppealsPanel() {
       await fetch(`/api/appeals/${selected.id}/reply`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: auth.user?.username, org: auth.user?.organization, message: reply }) });
       setReply('');
       await fetchAppeals();
+      setSelected(null);
       alert('Reply submitted');
     } catch (err) { console.error(err); alert('Failed to send reply'); }
   };
@@ -49,6 +50,7 @@ export default function AppealsPanel() {
     try {
       await fetch(`/api/appeals/${selected.id}/reconsider`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: auth.user?.username, org: auth.user?.organization, message: 'Request reconsideration by ' + (auth.user?.organization || '') }) });
       await fetchAppeals();
+      setSelected(null);
       alert('Reconsideration requested');
     } catch (err) { console.error(err); alert('Failed to request reconsideration'); }
   };
