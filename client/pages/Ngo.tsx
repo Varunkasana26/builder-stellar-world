@@ -72,7 +72,7 @@ export default function Ngo() {
               </select>
 
               <div className="mt-3 flex items-center gap-3">
-                <button onClick={sendAppeal} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-4 py-2">Submit Appeal</button>
+                <button onClick={sendAppeal} className="rounded-md btn-primary px-4 py-2">Submit Appeal</button>
                 <div className="text-sm text-muted-foreground">Appeals are recorded and can be reviewed by authorities.</div>
               </div>
             </div>
