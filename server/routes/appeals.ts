@@ -8,6 +8,7 @@ interface Appeal {
   targetOrg?: string;
   message: string;
   createdAt: string;
+  replies?: { by: string; org?: string; message: string; createdAt: string }[];
 }
 
 const appeals: Appeal[] = [];
