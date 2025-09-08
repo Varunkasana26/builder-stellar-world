@@ -73,7 +73,7 @@ export function ClaimAnalyzer() {
         <button
           onClick={onAnalyze}
           disabled={!selected || loading}
-          className="inline-flex items-center justify-center rounded-md bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white px-4 py-2 h-10 min-w-28"
+          className="inline-flex items-center justify-center rounded-md btn-primary disabled:opacity-50 text-white px-4 py-2 h-10 min-w-28"
         >
           {loading ? "Analyzing…" : "Run Analysis"}
         </button>
