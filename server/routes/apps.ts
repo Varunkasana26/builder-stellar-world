@@ -25,7 +25,7 @@ interface FRAApplication {
 // In-memory store for demo
 const applications: FRAApplication[] = [];
 
-const DEFAULT_FLOW = ["Gram Sabha", "Forest Ministry", "Central Ministry"];
+const DEFAULT_FLOW = ["Gram Sabha", "SDLC", "DLC", "MOTA"];
 
 function makeId() {
   return `APP-${Math.random().toString(36).slice(2, 9).toUpperCase()}`;
