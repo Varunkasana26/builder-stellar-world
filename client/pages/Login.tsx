@@ -46,30 +46,30 @@ export default function Login() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left: Ministry selection */}
           <div className="p-6 rounded-lg border bg-accent/30">
-            <h2 className="text-lg font-semibold">Select Your Ministry / Unit</h2>
-            <p className="text-sm text-muted-foreground mt-1">Choose the ministry or unit you represent before signing in.</p>
+            <h2 className="text-lg font-semibold">Organization</h2>
+            <p className="text-sm text-muted-foreground mt-1">Choose your organization type before signing in.</p>
 
             <div className="mt-4 space-y-4">
               <div>
-                <label className="text-sm text-muted-foreground">Ministry</label>
+                <label className="text-sm text-muted-foreground">Organization</label>
                 <select
-                  value={ministry}
-                  onChange={(e) => setMinistry(e.target.value)}
+                  value={organization}
+                  onChange={(e) => setOrganization(e.target.value)}
                   className="mt-1 w-full rounded-md border px-3 py-2 bg-background"
                 >
-                  {MINISTRY_OPTIONS.map((m) => (
+                  {ORG_OPTIONS.map((m) => (
                     <option key={m} value={m}>{m}</option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="text-sm text-muted-foreground">Organization / Unit</label>
+                <label className="text-sm text-muted-foreground">State</label>
                 <input
-                  value={organization}
-                  onChange={(e) => setOrganization(e.target.value)}
+                  value={stateName}
+                  onChange={(e) => setStateName(e.target.value)}
                   className="mt-1 w-full rounded-md border px-3 py-2 bg-background"
-                  placeholder="e.g. Madhya Pradesh Forest Dept., Gram Sabha — Adivasi"
+                  placeholder="e.g. Madhya Pradesh"
                 />
               </div>
 
