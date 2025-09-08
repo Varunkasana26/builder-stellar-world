@@ -66,15 +66,6 @@ export function ApplicationsPanel() {
     }
   };
 
-  const createMock = async () => {
-    await fetch("/api/apps", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ claimantName: `Demo Claim ${Math.floor(Math.random() * 1000)}`, areaHa: Number((Math.random() * 10 + 1).toFixed(2)) }),
-    });
-    fetchApps();
-  };
-
   const submitFRA = async () => {
     if (!fraName || !fraArea) return alert("Please provide claimant name and area");
     setSubmitting(true);
@@ -115,7 +106,6 @@ export function ApplicationsPanel() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Applications</h3>
           <div className="flex items-center gap-3">
-            <button onClick={createMock} className="rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1">Create Demo Application</button>
             <button onClick={fetchApps} className="rounded-md border px-3 py-1">Refresh</button>
           </div>
         </div>
