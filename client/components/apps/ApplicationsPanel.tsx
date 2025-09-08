@@ -87,13 +87,13 @@ export function ApplicationsPanel() {
       const created = await res.json();
 
       // If current user is Gram Sabha, auto-approve and advance
-      if (auth.user?.ministry === "Gram Sabha") {
-        await fetch(`/api/apps/${created.id}/action`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "approve", ministry: "Gram Sabha", signer: auth.user?.username }),
-        });
-      }
+    if (auth.user?.organization === "Gram Sabha") {
+      await fetch(`/api/apps/${created.id}/action`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "approve", ministry: "Gram Sabha", signer: auth.user?.username }),
+      });
+    }
 
       // Refresh list
       await fetchApps();
