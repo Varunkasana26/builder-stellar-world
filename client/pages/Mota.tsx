@@ -55,6 +55,11 @@ export default function Mota() {
             </div>
           ))}
         </div>
+
+        <div className="mt-6">
+          <h2 className="text-lg font-semibold mb-3">Appeals</h2>
+          <AppealsPanel />
+        </div>
       </section>
     </main>
   );
