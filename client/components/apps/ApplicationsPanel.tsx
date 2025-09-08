@@ -32,11 +32,11 @@ export function ApplicationsPanel() {
   const canAct = (app: AppItem) => {
     if (app.canceled) return false;
     const idx = app.currentStageIndex;
-    return app.stages[idx]?.ministry === auth.user?.ministry;
+    return app.stages[idx]?.ministry === auth.user?.organization;
   };
 
   const act = async (appId: string, action: "approve" | "reject" | "cancel") => {
-    const body = { action: action === "approve" ? "approve" : action === "reject" ? "reject" : "cancel", ministry: auth.user?.ministry, signer: auth.user?.username, reason: action === "reject" ? "Rejected by user" : undefined };
+    const body = { action: action === "approve" ? "approve" : action === "reject" ? "reject" : "cancel", ministry: auth.user?.organization, signer: auth.user?.username, reason: action === "reject" ? "Rejected by user" : undefined };
     await fetch(`/api/apps/${appId}/action`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
     await fetchApps();
     if (selected?.id === appId) {
