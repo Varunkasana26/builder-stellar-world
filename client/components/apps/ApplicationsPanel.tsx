@@ -145,7 +145,7 @@ export function ApplicationsPanel() {
                   </div>
                 </Link>
 
-                <a href="/forms/c" target="_blank" rel="noopener noreferrer" className="w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                <Link to="/forms/c" className="w-full text-left rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-semibold">Form C</div>
@@ -153,7 +153,7 @@ export function ApplicationsPanel() {
                     </div>
                     <div className="text-xs text-muted-foreground">Open</div>
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
