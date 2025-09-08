@@ -26,7 +26,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (raw) {
       try {
         const parsed = JSON.parse(raw);
-        if (parsed?.username) setUser({ username: parsed.username, ministry: parsed.ministry, organization: parsed.organization });
+        if (parsed?.username) setUser({ username: parsed.username, organization: parsed.organization, organizationState: parsed.organizationState });
       } catch (e) {
         // ignore
       }
@@ -39,8 +39,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Create a deterministic token for demo purposes
     const token = btoa(`${username}:${Date.now()}`);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ username, token, ministry: meta?.ministry, organization: meta?.organization }));
-    setUser({ username, ministry: meta?.ministry, organization: meta?.organization });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ username, token, organization: meta?.organization, organizationState: meta?.organizationState }));
+    setUser({ username, organization: meta?.organization, organizationState: meta?.organizationState });
     // simulate network latency
     await new Promise((r) => setTimeout(r, 350));
   };
