@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 
 const ORG_OPTIONS = [
-  "Gram Sabha",
-  "Sub-Divisional Level Committee (SDLC)",
-  "District Level Committee (DLC)",
-  "Ministry of Tribal Affairs (MOTA)",
-  "NGO",
+  { value: "Gram Sabha", label: "Gram Sabha" },
+  { value: "SDLC", label: "Sub-Divisional Level Committee (SDLC)" },
+  { value: "DLC", label: "District Level Committee (DLC)" },
+  { value: "MOTA", label: "Ministry of Tribal Affairs (MOTA)" },
+  { value: "NGO", label: "NGO" },
 ];
 
 export default function Login() {
-  const [organization, setOrganization] = useState<string>(ORG_OPTIONS[0]);
+  const [organization, setOrganization] = useState<string>(ORG_OPTIONS[0].value);
+  const [organizationLabel, setOrganizationLabel] = useState<string>(ORG_OPTIONS[0].label);
   const [stateName, setStateName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
