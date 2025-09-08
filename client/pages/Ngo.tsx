@@ -25,6 +25,7 @@ export default function Ngo() {
     if (!selectedApp || !message) return alert('Select application and enter a message');
     try {
       await fetch('/api/appeals', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: selectedApp, raisedBy: auth.user?.username, raisedOrg: auth.user?.organization, targetOrg, message }) });
+      try { localStorage.setItem('fra_appeal_created', JSON.stringify({ ts: Date.now() })); } catch (e) {}
       alert('Appeal submitted');
       setMessage('');
     } catch (err) { console.error(err); alert('Failed to submit'); }
