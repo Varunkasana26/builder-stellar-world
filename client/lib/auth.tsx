@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-type User = { username: string; organization?: string; organizationState?: string } | null;
+type User = { username: string; organization?: string; organizationLabel?: string; organizationState?: string } | null;
 
 interface LoginMeta {
   organization?: string;
+  organizationLabel?: string;
   organizationState?: string;
 }
 
