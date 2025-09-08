@@ -1,20 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/lib/auth";
+
+type AppealItem = any;
 
 export default function AppealsPanel() {
   const auth = useAuth();
-  const [appeals, setAppeals] = useState<any[]>([]);
+  const [appeals, setAppeals] = useState<AppealItem[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState<any | null>(null);
+  const [selected, setSelected] = useState<AppealItem | null>(null);
   const [reply, setReply] = useState("");
+  const [filterType, setFilterType] = useState<'all'|'appeal'|'complaint'|'suggestion'>('all');
+
+  const org = auth.user?.organization;
+  const readKey = `fra_read_ids_${org}`;
 
   const fetchAppeals = async () => {
     setLoading(true);
     try {
       const res = await fetch('/api/appeals');
       const data = await res.json();
-      // show appeals targeted to this organization
-      const filtered = data.filter((a:any) => a.targetOrg === auth.user?.organization);
+      const filtered = data.filter((a:any) => a.targetOrg === org);
+      // sort newest first
+      filtered.sort((a:any,b:any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       setAppeals(filtered);
     } catch (err) {
       console.error(err);
@@ -32,7 +39,43 @@ export default function AppealsPanel() {
     };
     window.addEventListener('storage', handler);
     return () => window.removeEventListener('storage', handler);
-  }, []);
+  }, [org]);
+
+  // manage read ids in localStorage
+  const getReadIds = () => {
+    try {
+      return JSON.parse(localStorage.getItem(readKey) || '[]') as string[];
+    } catch (e) { return []; }
+  };
+  const markRead = (id: string) => {
+    try {
+      const ids = new Set(getReadIds());
+      ids.add(id);
+      localStorage.setItem(readKey, JSON.stringify(Array.from(ids)));
+    } catch (e) {}
+  };
+
+  const counts = useMemo(() => {
+    const all = appeals.length;
+    const appealsCount = appeals.filter(a => a.type === 'appeal').length;
+    const complaintsCount = appeals.filter(a => a.type === 'complaint').length;
+    const suggestionsCount = appeals.filter(a => a.type === 'suggestion').length;
+
+    const readIds = new Set(getReadIds());
+    const unreadAll = appeals.filter(a => !readIds.has(a.id)).length;
+    const unreadAppeals = appeals.filter(a => a.type === 'appeal' && !readIds.has(a.id)).length;
+    const unreadComplaints = appeals.filter(a => a.type === 'complaint' && !readIds.has(a.id)).length;
+    const unreadSuggestions = appeals.filter(a => a.type === 'suggestion' && !readIds.has(a.id)).length;
+
+    return { all, appealsCount, complaintsCount, suggestionsCount, unreadAll, unreadAppeals, unreadComplaints, unreadSuggestions };
+  }, [appeals, org]);
+
+  const visible = appeals.filter(a => filterType === 'all' ? true : a.type === filterType);
+
+  const onSelect = (a: AppealItem) => {
+    setSelected(a);
+    markRead(a.id);
+  };
 
   const sendReply = async () => {
     if (!selected || !reply) return alert('Select appeal and enter reply');
@@ -57,23 +100,39 @@ export default function AppealsPanel() {
 
   return (
     <div className="rounded-lg border p-4">
-      <h4 className="font-semibold">Appeals for {auth.user?.organization}</h4>
+      <div className="flex items-center justify-between">
+        <h4 className="font-semibold">Inbox — {org}</h4>
+        <div className="text-sm text-muted-foreground">Unread: {counts.unreadAll}</div>
+      </div>
+
+      <div className="mt-3 flex gap-2 items-center">
+        <button className={`px-3 py-1 rounded-md ${filterType === 'all' ? 'bg-primary text-white' : 'border'}`} onClick={() => setFilterType('all')}>All ({counts.all}) {counts.unreadAll > 0 && <span className="ml-2 text-xs text-red-500">{counts.unreadAll}</span>}</button>
+        <button className={`px-3 py-1 rounded-md ${filterType === 'appeal' ? 'bg-primary text-white' : 'border'}`} onClick={() => setFilterType('appeal')}>Appeals ({counts.appealsCount}) {counts.unreadAppeals > 0 && <span className="ml-2 text-xs text-red-500">{counts.unreadAppeals}</span>}</button>
+        <button className={`px-3 py-1 rounded-md ${filterType === 'complaint' ? 'bg-primary text-white' : 'border'}`} onClick={() => setFilterType('complaint')}>Complaints ({counts.complaintsCount}) {counts.unreadComplaints > 0 && <span className="ml-2 text-xs text-red-500">{counts.unreadComplaints}</span>}</button>
+        <button className={`px-3 py-1 rounded-md ${filterType === 'suggestion' ? 'bg-primary text-white' : 'border'}`} onClick={() => setFilterType('suggestion')}>Suggestions ({counts.suggestionsCount}) {counts.unreadSuggestions > 0 && <span className="ml-2 text-xs text-red-500">{counts.unreadSuggestions}</span>}</button>
+        <button className="ml-auto rounded-md border px-3 py-1" onClick={fetchAppeals}>Refresh</button>
+      </div>
 
       <div className="mt-3">
         {loading && <div className="text-sm text-muted-foreground">Loading…</div>}
-        {appeals.length === 0 && !loading && <div className="text-sm text-muted-foreground">No appeals for your department.</div>}
+        {visible.length === 0 && !loading && <div className="text-sm text-muted-foreground">No items for this view.</div>}
 
         <div className="mt-3 space-y-2">
-          {appeals.map((a) => (
+          {visible.map((a) => (
             <div key={a.id} className={`rounded-lg border p-3 ${selected?.id === a.id ? 'bg-secondary' : ''}`}>
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="font-semibold">{a.id} — {a.appId}</div>
+                  <div className="flex items-center gap-2">
+                    <div className="font-semibold">{a.id}{a.appId ? ` — ${a.appId}` : ''}</div>
+                    <div className={`text-xs px-2 py-0.5 rounded ${a.type === 'appeal' ? 'bg-green-100 text-green-800' : a.type === 'complaint' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'}`}>{a.type?.toUpperCase()}</div>
+                  </div>
                   <div className="text-sm text-muted-foreground">Raised by: {a.raisedBy} ({a.raisedOrg ?? 'Unknown'})</div>
+                  {a.purpose && <div className="mt-1 text-sm"><strong>Purpose:</strong> {a.purpose}</div>}
                   <div className="mt-2 text-sm">{a.message}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{new Date(a.createdAt).toLocaleString()}</div>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <button onClick={() => setSelected(a)} className="rounded-md border px-3 py-1">Select</button>
+                  <button onClick={() => onSelect(a)} className="rounded-md border px-3 py-1">Select</button>
                 </div>
               </div>
             </div>
@@ -81,8 +140,8 @@ export default function AppealsPanel() {
         </div>
 
         <div className="mt-4">
-          <label className="text-sm text-muted-foreground">Selected Appeal</label>
-          <div className="mt-1 mb-2">{selected ? `${selected.id} — ${selected.appId}` : <span className="text-xs text-muted-foreground">None selected</span>}</div>
+          <label className="text-sm text-muted-foreground">Selected Item</label>
+          <div className="mt-1 mb-2">{selected ? `${selected.id}${selected.appId ? ` — ${selected.appId}` : ''}` : <span className="text-xs text-muted-foreground">None selected</span>}</div>
 
           <label className="text-sm text-muted-foreground">Reply</label>
           <textarea value={reply} onChange={(e) => setReply(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={3}></textarea>
