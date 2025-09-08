@@ -14,13 +14,21 @@ export default function Dashboard() {
   return (
     <main className="flex-1">
       <section className="container py-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">{auth.user?.organizationLabel ?? 'Dashboard'}</h1>
-          <div className="text-sm text-muted-foreground">User: {auth.user?.username} {auth.user?.organizationState ? `— ${auth.user?.organizationState}` : ''}</div>
-        </div>
+        <div className="card-quiet hero-gradient rounded-2xl p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-extrabold">Forest Rights Act Decision Support System</h1>
+              <p className="mt-2 text-muted-foreground">AI-powered analytics and geospatial insights for sustainable forest management</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button className="rounded-md border px-3 py-2">Analytics</button>
+              <button className="btn-primary">Settings</button>
+            </div>
+          </div>
 
-        <div className="mt-6">
-          <StatsCards />
+          <div className="mt-6">
+            <StatsCards />
+          </div>
         </div>
       </section>
 
