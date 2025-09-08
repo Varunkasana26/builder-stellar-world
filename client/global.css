@@ -14,7 +14,7 @@
   */
   :root {
     /* Light theme: white with gentle green accents */
-    --background: 142 60% 98%; /* very light green tint */
+    --background: 140 80% 98%; /* brighter light green tint */
     --foreground: 210 16% 12%; /* dark text */
 
     --card: 0 0% 100%;
