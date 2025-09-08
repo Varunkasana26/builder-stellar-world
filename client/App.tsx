@@ -46,6 +46,7 @@ const App = () => (
                 />
                 <Route path="/mota" element={<ProtectedRoute><Mota /></ProtectedRoute>} />
                 <Route path="/ngo" element={<ProtectedRoute><Ngo /></ProtectedRoute>} />
+                <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
 
                 <Route path="/forms/a" element={<FormA />} />
                 <Route path="/forms/b" element={<FormB />} />
