@@ -23,6 +23,8 @@ export default function FormA() {
     try {
       const formData = { claimantName, spouse, parent, village, gramPanchayat: gram, tehsil, district, scheduled, family, nature };
       await fetch("/api/apps", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ claimantName, areaHa: 0, formType: "A", formData }) });
+      // notify other tabs
+      try { localStorage.setItem('fra_app_created', JSON.stringify({ ts: Date.now() })); } catch(e) {}
       alert("Application submitted");
       navigate("/dashboard");
     } catch (err) {
