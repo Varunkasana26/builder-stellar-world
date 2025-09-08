@@ -152,7 +152,7 @@ export function ApplicationsPanel() {
             </div>
           </div>
 
-          <div className="rounded-lg border p-4 bg-secondary hidden">
+          <div className="rounded-lg border p-4 bg-secondary">
             <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
 
             <div className="mt-3 mb-4">
