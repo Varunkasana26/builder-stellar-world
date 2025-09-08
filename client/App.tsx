@@ -45,6 +45,11 @@ const App = () => (
                 />
                 <Route path="/mota" element={<ProtectedRoute><Mota /></ProtectedRoute>} />
                 <Route path="/ngo" element={<ProtectedRoute><Ngo /></ProtectedRoute>} />
+
+                <Route path="/forms/a" element={<ProtectedRoute><FormA /></ProtectedRoute>} />
+                <Route path="/forms/b" element={<ProtectedRoute><FormB /></ProtectedRoute>} />
+                <Route path="/forms/c" element={<ProtectedRoute><FormC /></ProtectedRoute>} />
+
                 <Route
                   path="/"
                   element={<Index />}
