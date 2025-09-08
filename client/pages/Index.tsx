@@ -37,7 +37,7 @@ export default function Index() {
               for verification, monitoring, and planning under the FRA.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#atlas" className="inline-flex items-center justify-center rounded-md bg-primary hover:bg-emerald-500 text-white px-5 py-3 font-medium shadow-sm">Open Atlas</a>
+              <a href="#atlas" className="inline-flex items-center justify-center rounded-md bg-primary text-white px-5 py-3 font-medium shadow-sm btn-primary">Open Atlas</a>
               <a href="#analysis" className="inline-flex items-center justify-center rounded-md border px-5 py-3 font-medium">Run AI Analysis</a>
             </div>
             <div className="mt-8">
