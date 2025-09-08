@@ -115,7 +115,44 @@ export function ApplicationsPanel() {
       {/* For Gram Sabha: show Create Application and Raise Appeal side-by-side */}
       {auth.user?.organization === "Gram Sabha" && (
         <div className="grid md:grid-cols-2 gap-4 mb-4">
-          <div className="rounded-lg border p-4 bg-secondary">
+          <div>
+            <div className="rounded-lg border p-4 bg-secondary">
+              <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
+              <div className="mt-4 flex flex-col gap-3">
+                <a href="/forms/a" className="rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-semibold">Form A</div>
+                      <div className="text-sm text-muted-foreground">Individual Claim</div>
+                    </div>
+                    <div className="text-xs text-muted-foreground">Open</div>
+                  </div>
+                </a>
+
+                <a href="/forms/b" className="rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-semibold">Form B</div>
+                      <div className="text-sm text-muted-foreground">Community Rights</div>
+                    </div>
+                    <div className="text-xs text-muted-foreground">Open</div>
+                  </div>
+                </a>
+
+                <a href="/forms/c" className="rounded-lg border p-4 hover:shadow-lg transition transform hover:-translate-y-1 bg-white/60">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-semibold">Form C</div>
+                      <div className="text-sm text-muted-foreground">Community Forest Resource</div>
+                    </div>
+                    <div className="text-xs text-muted-foreground">Open</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-lg border p-4 bg-secondary hidden">
             <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
 
             <div className="mt-3 mb-4">
