@@ -25,16 +25,24 @@ export default function Dashboard() {
       </section>
 
       <section className="container py-6">
-        <div className="grid lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
+        {/* For Gram Sabha show applications and appeals side-by-side */}
+        {auth.user?.organization === 'Gram Sabha' ? (
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-lg font-semibold mb-3">Applications</h2>
+              <ApplicationsPanel />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold mb-3">Appeals</h2>
+              <AppealsPanel />
+            </div>
+          </div>
+        ) : (
+          <div>
             <h2 className="text-lg font-semibold mb-3">Applications Workflow</h2>
             <ApplicationsPanel />
           </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-3">Activity & Alerts</h2>
-            <ActivityFeed />
-          </div>
-        </div>
+        )}
       </section>
     </main>
   );
