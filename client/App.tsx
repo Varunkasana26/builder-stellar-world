@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Mota from "./pages/Mota";
 import Ngo from "./pages/Ngo";
+import Settings from "./pages/Settings";
 import FormA from "./pages/forms/FormA";
 import FormB from "./pages/forms/FormB";
 import FormC from "./pages/forms/FormC";
