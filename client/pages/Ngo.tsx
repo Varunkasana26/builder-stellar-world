@@ -8,6 +8,7 @@ export default function Ngo() {
   const [message, setMessage] = useState("");
   const [selectedApp, setSelectedApp] = useState<string | null>(null);
   const [targetOrg, setTargetOrg] = useState<string>("SDLC");
+  const [appealType, setAppealType] = useState<'appeal'|'complaint'>('appeal');
 
   useEffect(() => {
     (async () => {
