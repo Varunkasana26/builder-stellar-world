@@ -38,6 +38,8 @@ export function createServer() {
   // Appeals (NGO)
   app.get("/api/appeals", listAppeals);
   app.post("/api/appeals", createAppeal);
+  app.post("/api/appeals/:id/reply", replyAppeal);
+  app.post("/api/appeals/:id/reconsider", reconsiderAppeal);
 
   return app;
 }
