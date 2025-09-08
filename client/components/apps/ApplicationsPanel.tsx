@@ -124,9 +124,29 @@ export function ApplicationsPanel() {
           </div>
         )}
 
+        <div className="mb-4 flex items-center gap-3">
+          <label className="text-sm text-muted-foreground">Stage</label>
+          <select className="rounded-md border px-3 py-1 bg-background" onChange={(e) => setStageFilter(e.target.value)} value={stageFilter}>
+            <option value="all">All</option>
+            {apps[0]?.stages?.map((s, i) => (
+              <option key={i} value={s.ministry}>{s.ministry}</option>
+            ))}
+          </select>
+
+          <label className="text-sm text-muted-foreground">Status</label>
+          <select className="rounded-md border px-3 py-1 bg-background" onChange={(e) => setStatusFilter(e.target.value)} value={statusFilter}>
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+
+          <div className="ml-auto text-sm text-muted-foreground">Showing {filteredApps.length} applications</div>
+        </div>
+
         <div className="space-y-3">
           {loading && <div className="text-sm text-muted-foreground">Loading…</div>}
-          {apps.map((a) => (
+          {filteredApps.map((a) => (
             <div key={a.id} className="rounded-lg border p-3 flex items-start justify-between">
               <div>
                 <div className="font-semibold">{a.claimantName} <span className="text-xs text-muted-foreground">{a.id}</span></div>
