@@ -35,5 +35,9 @@ export function createServer() {
   app.get("/api/apps/:id", getApp);
   app.post("/api/apps/:id/action", actOnApp);
 
+  // Appeals (NGO)
+  app.get("/api/appeals", listAppeals);
+  app.post("/api/appeals", createAppeal);
+
   return app;
 }
