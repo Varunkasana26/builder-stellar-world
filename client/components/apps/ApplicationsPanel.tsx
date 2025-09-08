@@ -156,7 +156,49 @@ export function ApplicationsPanel() {
             <h4 className="font-semibold">Application Form</h4>
 
             {selectedForm === null ? (
-              <div className="text-sm text-muted-foreground">Select a form to begin filling the application.</div>
+              <div>
+                <h5 className="font-semibold">Raise Appeal</h5>
+                <div className="mt-3 space-y-3">
+                  {apps.filter((a) => a.canceled || a.currentStageIndex >= a.stages.length).map((a) => (
+                    <div key={a.id} className="rounded-lg border p-3 flex items-center justify-between">
+                      <div>
+                        <div className="font-semibold">{a.claimantName} <span className="text-xs text-muted-foreground">{a.id}</span></div>
+                        <div className="text-sm text-muted-foreground">{a.canceled ? 'Rejected' : 'Approved'}</div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => { setSelected(a); setAppealMessage(''); setAppealTarget('SDLC'); }} className="rounded-md border px-3 py-1">Select</button>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="mt-3">
+                    <label className="text-sm text-muted-foreground">Selected Application</label>
+                    <div className="mt-1 mb-2">{selected ? `${selected.claimantName} (${selected.id})` : <span className="text-xs text-muted-foreground">None selected</span>}</div>
+
+                    <label className="text-sm text-muted-foreground">Target Organization</label>
+                    <select value={appealTarget} onChange={(e) => setAppealTarget(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background">
+                      <option value="SDLC">Sub-Divisional Level Committee (SDLC)</option>
+                      <option value="DLC">District Level Committee (DLC)</option>
+                      <option value="MOTA">Ministry of Tribal Affairs (MOTA)</option>
+                    </select>
+
+                    <label className="text-sm text-muted-foreground mt-2">Message</label>
+                    <textarea value={appealMessage} onChange={(e) => setAppealMessage(e.target.value)} className="mt-1 w-full rounded-md border px-3 py-2 bg-background" rows={4}></textarea>
+
+                    <div className="mt-3 flex items-center gap-3">
+                      <button onClick={async () => {
+                        if (!selected || !appealMessage) return alert('Select application and enter a message');
+                        try {
+                          await fetch('/api/appeals', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: selected.id, raisedBy: auth.user?.username, raisedOrg: auth.user?.organization, targetOrg: appealTarget, message: appealMessage }) });
+                          alert('Appeal submitted');
+                          setAppealMessage('');
+                          setSelected(null);
+                        } catch (err) { console.error(err); alert('Failed to submit appeal'); }
+                      }} className="btn-primary px-4 py-2">Submit Appeal</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ) : (
               <div className="mt-3 animate-fade-in-up">
                 {/* reuse dynamic fields from before */}
