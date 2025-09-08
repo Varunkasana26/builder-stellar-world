@@ -55,11 +55,16 @@ export default function Login() {
                 <label className="text-sm text-muted-foreground">Organization</label>
                 <select
                   value={organization}
-                  onChange={(e) => setOrganization(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setOrganization(val);
+                    const found = ORG_OPTIONS.find(o => o.value === val);
+                    setOrganizationLabel(found?.label ?? val);
+                  }}
                   className="mt-1 w-full rounded-md border px-3 py-2 bg-background"
                 >
                   {ORG_OPTIONS.map((m) => (
-                    <option key={m} value={m}>{m}</option>
+                    <option key={m.value} value={m.value}>{m.label}</option>
                   ))}
                 </select>
               </div>
