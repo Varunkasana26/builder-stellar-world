@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
-import { useEffect, useState } from "react";
 
 export default function Ngo() {
   const auth = useAuth();
