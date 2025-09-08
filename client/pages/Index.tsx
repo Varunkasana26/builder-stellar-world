@@ -26,7 +26,7 @@ export default function Index() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs bg-accent">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="h-2 w-2 rounded-full bg-primary" />
                 AI-powered FRA Atlas & WebGIS DSS
             </div>
             <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">
@@ -37,7 +37,7 @@ export default function Index() {
               for verification, monitoring, and planning under the FRA.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#atlas" className="inline-flex items-center justify-center rounded-md bg-emerald-400 hover:bg-emerald-500 text-white px-5 py-3 font-medium shadow-sm">Open Atlas</a>
+              <a href="#atlas" className="inline-flex items-center justify-center rounded-md bg-primary hover:bg-emerald-500 text-white px-5 py-3 font-medium shadow-sm">Open Atlas</a>
               <a href="#analysis" className="inline-flex items-center justify-center rounded-md border px-5 py-3 font-medium">Run AI Analysis</a>
             </div>
             <div className="mt-8">
