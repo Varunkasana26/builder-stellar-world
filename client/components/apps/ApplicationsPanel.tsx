@@ -155,14 +155,6 @@ export function ApplicationsPanel() {
           <div className="rounded-lg border p-4 bg-secondary">
             <h4 className="font-semibold">Create Application (Gram Sabha)</h4>
 
-            <div className="mt-3 mb-4">
-              <label className="text-sm text-muted-foreground">Choose form type</label>
-              <div className="mt-2 flex gap-2">
-                <button onClick={() => { setSelectedForm('A'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'A' ? 'btn-primary' : 'border'}`}>Form A (Individual Claim)</button>
-                <button onClick={() => { setSelectedForm('B'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'B' ? 'btn-primary' : 'border'}`}>Form B (Community Rights)</button>
-                <button onClick={() => { setSelectedForm('C'); setFormData({}); }} className={`px-3 py-1 rounded-md ${selectedForm === 'C' ? 'btn-primary' : 'border'}`}>Form C (Community Forest Resource)</button>
-              </div>
-            </div>
 
             {selectedForm === null ? (
               <div className="text-sm text-muted-foreground">Select a form to begin filling the application.</div>
