@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
+import { Link } from "react-router-dom";
 
 type AppStage = { ministry: string; status: string; signedBy?: string; timestamp?: string; reason?: string };
 type AppItem = { id: string; claimantName: string; areaHa: number; stages: AppStage[]; currentStageIndex: number; canceled?: boolean };
