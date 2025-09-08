@@ -30,7 +30,7 @@ export default function Mota() {
     alert(`Recommended schemes for ${appId}:\n` + schemes.map(s => `${s.name} (${s.score}%)`).join('\n'));
   };
 
-  if (auth.user?.organization !== 'Ministry of Tribal Affairs (MOTA)') {
+  if (auth.user?.organization !== 'MOTA') {
     return <div className="container py-12">Access restricted to MOTA users</div>;
   }
 
