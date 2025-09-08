@@ -16,6 +16,7 @@ export default function FormC() {
     try {
       const formData = { village, members, boundary };
       await fetch("/api/apps", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ claimantName: village, areaHa: 0, formType: "C", formData }) });
+      try { localStorage.setItem('fra_app_created', JSON.stringify({ ts: Date.now() })); } catch(e) {}
       alert("Application submitted");
       navigate("/dashboard");
     } catch (err) {
