@@ -24,7 +24,7 @@ export function createServer() {
   });
   app.get("/api/demo", handleDemo);
 
-  // FRA Atlas APIs (mock)
+  // VanDarpan (FRA) APIs (mock)
   app.get("/api/geo/forest-boundary", getForestBoundary);
   app.get("/api/geo/claims", getSampleClaims);
   app.post("/api/analysis/claim", analyzeClaim);
