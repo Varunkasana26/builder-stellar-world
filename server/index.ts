@@ -7,7 +7,6 @@ import { analyzeClaim } from "./routes/analysis";
 import { getStatsOverview } from "./routes/stats";
 import { listApps, createApp, getApp, actOnApp } from "./routes/apps";
 import { listAppeals, createAppeal, replyAppeal, reconsiderAppeal } from "./routes/appeals";
-import { trainRecommendations, predictRecommendations, listCandidates } from "./routes/recommendations";
 
 export function createServer() {
   const app = express();
