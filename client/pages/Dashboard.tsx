@@ -8,7 +8,7 @@ export default function Dashboard() {
   const auth = useAuth();
 
   useEffect(() => {
-    document.title = `FRA Atlas — ${auth.user?.organizationLabel ?? 'Dashboard'}`;
+    document.title = `VanDarpan — ${auth.user?.organizationLabel ?? 'Dashboard'}`;
   }, [auth.user]);
 
   return (
