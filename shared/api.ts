@@ -1,5 +1,5 @@
 /**
- * Shared types and utilities for the FRA Atlas & WebGIS DSS
+ * Shared types and utilities for VanDarpan (FRA) & WebGIS DSS
  */
 
 // Basic GeoJSON types (minimal for our needs)
