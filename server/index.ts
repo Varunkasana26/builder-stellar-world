@@ -41,10 +41,5 @@ export function createServer() {
   app.post("/api/appeals/:id/reply", replyAppeal);
   app.post("/api/appeals/:id/reconsider", reconsiderAppeal);
 
-  // Recommendations (MOTA)
-  app.post("/api/recommendations/train", trainRecommendations);
-  app.post("/api/recommendations/predict", predictRecommendations);
-  app.get("/api/recommendations/candidates", listCandidates);
-
   return app;
 }
