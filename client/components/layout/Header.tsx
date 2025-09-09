@@ -57,7 +57,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <Link to={user ? "/dashboard" : "/login"} className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-md bg-gradient-to-br from-primary to-accent shadow-md transform transition-transform hover:scale-105" />
-          <span className="font-extrabold tracking-tight text-xl">FRA Atlas</span>
+          <span className="font-extrabold tracking-tight text-xl">VanDarpan</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           {user && (
