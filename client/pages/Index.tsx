@@ -27,7 +27,7 @@ export default function Index() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs bg-accent">
               <span className="h-2 w-2 rounded-full bg-primary" />
-                AI-powered FRA Atlas & WebGIS DSS
+                AI-powered VanDarpan & WebGIS DSS
             </div>
             <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">
               Forest Rights Act Atlas for Government Decision Support
