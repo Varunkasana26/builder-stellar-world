@@ -30,41 +30,59 @@ const App = () => (
       <Sonner />
       <ThemeProvider>
         <AuthProvider>
-        <BrowserRouter>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <div className="flex-1">
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route
-                  path="/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/mota" element={<ProtectedRoute><Mota /></ProtectedRoute>} />
-                <Route path="/ngo" element={<ProtectedRoute><Ngo /></ProtectedRoute>} />
-                <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <BrowserRouter>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <div className="flex-1">
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/mota"
+                    element={
+                      <ProtectedRoute>
+                        <Mota />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/ngo"
+                    element={
+                      <ProtectedRoute>
+                        <Ngo />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/settings"
+                    element={
+                      <ProtectedRoute>
+                        <Settings />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                <Route path="/forms/a" element={<FormA />} />
-                <Route path="/forms/b" element={<FormB />} />
-                <Route path="/forms/c" element={<FormC />} />
+                  <Route path="/forms/a" element={<FormA />} />
+                  <Route path="/forms/b" element={<FormB />} />
+                  <Route path="/forms/c" element={<FormC />} />
 
-                <Route
-                  path="/"
-                  element={<Index />}
-                />
+                  <Route path="/" element={<Index />} />
 
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </BrowserRouter>
-      </AuthProvider>
+          </BrowserRouter>
+        </AuthProvider>
       </ThemeProvider>
     </TooltipProvider>
   </QueryClientProvider>

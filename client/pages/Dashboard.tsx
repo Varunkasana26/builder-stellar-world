@@ -8,7 +8,7 @@ export default function Dashboard() {
   const auth = useAuth();
 
   useEffect(() => {
-    document.title = `VanDarpan — ${auth.user?.organizationLabel ?? 'Dashboard'}`;
+    document.title = `VanDarpan — ${auth.user?.organizationLabel ?? "Dashboard"}`;
   }, [auth.user]);
 
   return (
@@ -17,8 +17,13 @@ export default function Dashboard() {
         <div className="card-quiet hero-gradient rounded-2xl p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-extrabold">Forest Rights Act Decision Support System</h1>
-              <p className="mt-2 text-muted-foreground">AI-powered analytics and geospatial insights for sustainable forest management</p>
+              <h1 className="text-3xl font-extrabold">
+                Forest Rights Act Decision Support System
+              </h1>
+              <p className="mt-2 text-muted-foreground">
+                AI-powered analytics and geospatial insights for sustainable
+                forest management
+              </p>
             </div>
             <div className="flex items-center gap-3">
               <button className="rounded-md border px-3 py-2">Analytics</button>
@@ -35,11 +40,15 @@ export default function Dashboard() {
       <section className="container py-6">
         <div className="grid lg:grid-cols-2 gap-6">
           <div>
-            <h2 className="text-lg font-semibold mb-3 whitespace-nowrap">Applications</h2>
+            <h2 className="text-lg font-semibold mb-3 whitespace-nowrap">
+              Applications
+            </h2>
             <ApplicationsPanel />
           </div>
           <div>
-            <h2 className="text-lg font-semibold mb-3 whitespace-nowrap">Appeals</h2>
+            <h2 className="text-lg font-semibold mb-3 whitespace-nowrap">
+              Appeals
+            </h2>
             <AppealsPanel />
           </div>
         </div>

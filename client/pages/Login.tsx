@@ -11,8 +11,12 @@ const ORG_OPTIONS = [
 ];
 
 export default function Login() {
-  const [organization, setOrganization] = useState<string>(ORG_OPTIONS[0].value);
-  const [organizationLabel, setOrganizationLabel] = useState<string>(ORG_OPTIONS[0].label);
+  const [organization, setOrganization] = useState<string>(
+    ORG_OPTIONS[0].value,
+  );
+  const [organizationLabel, setOrganizationLabel] = useState<string>(
+    ORG_OPTIONS[0].label,
+  );
   const [stateName, setStateName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +30,11 @@ export default function Login() {
     setError(null);
     setLoading(true);
     try {
-      await auth.login(username.trim(), password.trim(), { organization: organization, organizationState: stateName, organizationLabel });
+      await auth.login(username.trim(), password.trim(), {
+        organization: organization,
+        organizationState: stateName,
+        organizationLabel,
+      });
       navigate("/dashboard", { replace: true });
     } catch (err: any) {
       setError(err?.message ?? "Login failed");
@@ -42,23 +50,29 @@ export default function Login() {
           {/* Left: Ministry selection */}
           <div className="p-6 rounded-lg border bg-accent/30">
             <h2 className="text-lg font-semibold">Organization</h2>
-            <p className="text-sm text-muted-foreground mt-1">Choose your organization type before signing in.</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Choose your organization type before signing in.
+            </p>
 
             <div className="mt-4 space-y-4">
               <div>
-                <label className="text-sm text-muted-foreground">Organization</label>
+                <label className="text-sm text-muted-foreground">
+                  Organization
+                </label>
                 <select
                   value={organization}
                   onChange={(e) => {
                     const val = e.target.value;
                     setOrganization(val);
-                    const found = ORG_OPTIONS.find(o => o.value === val);
+                    const found = ORG_OPTIONS.find((o) => o.value === val);
                     setOrganizationLabel(found?.label ?? val);
                   }}
                   className="mt-1 w-full rounded-md border px-3 py-2 bg-background"
                 >
                   {ORG_OPTIONS.map((m) => (
-                    <option key={m.value} value={m.value}>{m.label}</option>
+                    <option key={m.value} value={m.value}>
+                      {m.label}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -73,18 +87,24 @@ export default function Login() {
                 />
               </div>
 
-              <div className="text-xs text-muted-foreground">This information is stored locally for demo sessions only.</div>
+              <div className="text-xs text-muted-foreground">
+                This information is stored locally for demo sessions only.
+              </div>
             </div>
           </div>
 
           {/* Right: Credentials */}
           <div className="p-6">
             <h1 className="text-2xl font-bold">Sign in to VanDarpan</h1>
-            <p className="text-sm text-muted-foreground mt-1">Enter credentials for the selected ministry/unit.</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Enter credentials for the selected ministry/unit.
+            </p>
 
             <form onSubmit={onSubmit} className="mt-6 space-y-4">
               <div>
-                <label className="text-sm text-muted-foreground">Username</label>
+                <label className="text-sm text-muted-foreground">
+                  Username
+                </label>
                 <input
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -95,7 +115,9 @@ export default function Login() {
               </div>
 
               <div>
-                <label className="text-sm text-muted-foreground">Password</label>
+                <label className="text-sm text-muted-foreground">
+                  Password
+                </label>
                 <input
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -105,7 +127,9 @@ export default function Login() {
                 />
               </div>
 
-              {error && <div className="text-sm text-destructive mt-1">{error}</div>}
+              {error && (
+                <div className="text-sm text-destructive mt-1">{error}</div>
+              )}
 
               <div className="flex items-center justify-between">
                 <button
@@ -115,7 +139,12 @@ export default function Login() {
                 >
                   {loading ? "Signing in…" : "Sign in"}
                 </button>
-                <a href="#" className="text-sm text-muted-foreground hover:underline">Need help?</a>
+                <a
+                  href="#"
+                  className="text-sm text-muted-foreground hover:underline"
+                >
+                  Need help?
+                </a>
               </div>
 
               <div className="mt-2 text-xs text-muted-foreground">
