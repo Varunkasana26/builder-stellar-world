@@ -79,7 +79,7 @@ export default function Login() {
 
           {/* Right: Credentials */}
           <div className="p-6">
-            <h1 className="text-2xl font-bold">Sign in to FRA Atlas</h1>
+            <h1 className="text-2xl font-bold">Sign in to VanDarpan</h1>
             <p className="text-sm text-muted-foreground mt-1">Enter credentials for the selected ministry/unit.</p>
 
             <form onSubmit={onSubmit} className="mt-6 space-y-4">
